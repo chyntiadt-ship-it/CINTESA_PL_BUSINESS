@@ -7,52 +7,95 @@ if (!isset($_SESSION['id_user'])) {
     exit;
 }
 
-if ($_SESSION['role'] != 'penjual') {
+if ($_SESSION['role'] != 'admin') {
     header("Location: ../auth/login.php");
     exit;
 }
 
-$id_user = $_SESSION['id_user'];
+// Jika admin klik tandai sudah dibaca
+if (isset($_GET['dibaca'])) {
+    $id_cs = mysqli_real_escape_string($koneksi, $_GET['dibaca']);
 
-$total_produk = mysqli_query($koneksi, "SELECT COUNT(*) AS total FROM produk WHERE id_user='$id_user'");
-$data_produk = mysqli_fetch_assoc($total_produk);
+    mysqli_query($koneksi, "UPDATE customer_service 
+        SET status_pesan='Sudah Dibaca' 
+        WHERE id_cs='$id_cs'
+    ");
 
-$total_tersedia = mysqli_query($koneksi, "SELECT COUNT(*) AS total FROM produk WHERE id_user='$id_user' AND status_produk='Tersedia'");
-$data_tersedia = mysqli_fetch_assoc($total_tersedia);
+    header("Location: customer_service.php");
+    exit;
+}
 
-$total_terjual = mysqli_query($koneksi, "SELECT COUNT(*) AS total FROM produk WHERE id_user='$id_user' AND status_produk='Terjual'");
-$data_terjual = mysqli_fetch_assoc($total_terjual);
+$query = mysqli_query($koneksi, "SELECT customer_service.*, user.username, user.nama_lengkap, user.role
+    FROM customer_service
+    JOIN user ON customer_service.id_user = user.id_user
+    ORDER BY customer_service.tanggal_pesan DESC
+");
 ?>
 
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard Penjual - Pree Love</title>
+    <title>Customer Service Admin - Pree Love</title>
 </head>
 <body>
 
-    <h2>Dashboard Penjual</h2>
-    <p>Selamat datang, <?php echo $_SESSION['nama_lengkap']; ?></p>
+    <h2>Customer Service Admin</h2>
+
+    <a href="dashboard.php">Kembali ke Dashboard</a>
 
     <hr>
 
-    <h3>Ringkasan Produk</h3>
-    <p>Total Produk Saya: <?php echo $data_produk['total']; ?></p>
-    <p>Produk Tersedia: <?php echo $data_tersedia['total']; ?></p>
-    <p>Produk Terjual: <?php echo $data_terjual['total']; ?></p>
+    <table border="1" cellpadding="10" cellspacing="0">
+        <tr>
+            <th>No</th>
+            <th>Nama User</th>
+            <th>Username</th>
+            <th>Role</th>
+            <th>Jenis Pesan</th>
+            <th>Isi Pesan</th>
+            <th>Status</th>
+            <th>Tanggal</th>
+            <th>Aksi</th>
+        </tr>
 
-    <hr>
+        <?php
+        $no = 1;
 
-    <h3>Menu Penjual</h3>
-    <ul>
-        <li><a href="profile.php">Profile</a></li>
-        <li><a href="produk.php">Manajemen Produk</a></li>
-        <li><a href="pesan.php">Pesan</a></li>
-        <li><a href="customer_service.php">Customer Service</a></li>
-    </ul>
+        if (mysqli_num_rows($query) > 0) {
+            while ($data = mysqli_fetch_assoc($query)) {
+        ?>
 
-    <a href="../auth/logout.php">Logout</a>
+        <tr>
+            <td><?php echo $no++; ?></td>
+            <td><?php echo $data['nama_lengkap']; ?></td>
+            <td><?php echo $data['username']; ?></td>
+            <td><?php echo $data['role']; ?></td>
+            <td><?php echo $data['jenis_pesan']; ?></td>
+            <td><?php echo $data['isi_pesan']; ?></td>
+            <td><?php echo $data['status_pesan']; ?></td>
+            <td><?php echo $data['tanggal_pesan']; ?></td>
+            <td>
+                <?php if ($data['status_pesan'] == 'Belum Dibaca') { ?>
+                    <a href="customer_service.php?dibaca=<?php echo $data['id_cs']; ?>">Tandai Sudah Dibaca</a>
+                <?php } else { ?>
+                    Sudah Dibaca
+                <?php } ?>
+            </td>
+        </tr>
+
+        <?php
+            }
+        } else {
+        ?>
+
+        <tr>
+            <td colspan="9">Belum ada pesan customer service.</td>
+        </tr>
+
+        <?php } ?>
+
+    </table>
 
 </body>
 </html>

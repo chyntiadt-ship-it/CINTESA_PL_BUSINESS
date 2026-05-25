@@ -7,53 +7,35 @@ if (!isset($_SESSION['id_user'])) {
     exit;
 }
 
-if ($_SESSION['role'] != 'penjual') {
+if ($_SESSION['role'] != 'admin') {
     header("Location: ../auth/login.php");
     exit;
 }
+
+if (!isset($_GET['id'])) {
+    header("Location: manajemen_user.php");
+    exit;
+}
+
+$id_user = mysqli_real_escape_string($koneksi, $_GET['id']);
+
+// Pastikan yang diaktifkan bukan admin
+$cek = mysqli_query($koneksi, "SELECT * FROM user WHERE id_user='$id_user'");
+
+if (mysqli_num_rows($cek) == 0) {
+    echo "User tidak ditemukan.";
+    exit;
+}
+
+$data = mysqli_fetch_assoc($cek);
+
+if ($data['role'] == 'admin') {
+    echo "Admin tidak perlu diaktifkan dari halaman ini.";
+    exit;
+}
+
+mysqli_query($koneksi, "UPDATE user SET status='aktif' WHERE id_user='$id_user'");
+
+header("Location: detail_user.php?id=$id_user");
+exit;
 ?>
-
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <title>Customer Service - Pree Love</title>
-</head>
-<body>
-
-    <h2>Customer Service Penjual</h2>
-
-    <a href="dashboard.php">Kembali ke Dashboard</a>
-
-    <hr>
-
-    <?php
-    if (isset($_GET['pesan'])) {
-        if ($_GET['pesan'] == "berhasil") {
-            echo "<p style='color:green;'>Pesan berhasil dikirim ke admin.</p>";
-        } elseif ($_GET['pesan'] == "gagal") {
-            echo "<p style='color:red;'>Pesan gagal dikirim.</p>";
-        } elseif ($_GET['pesan'] == "kosong") {
-            echo "<p style='color:red;'>Jenis pesan dan isi pesan wajib diisi.</p>";
-        }
-    }
-    ?>
-
-    <form action="proses_customer_service.php" method="POST">
-        <label>Jenis Pesan</label><br>
-        <select name="jenis_pesan" required>
-            <option value="">-- Pilih Jenis Pesan --</option>
-            <option value="Keluhan">Keluhan</option>
-            <option value="Saran">Saran</option>
-            <option value="Kritik">Kritik</option>
-            <option value="Laporan">Laporan</option>
-        </select><br><br>
-
-        <label>Isi Pesan</label><br>
-        <textarea name="isi_pesan" rows="6" placeholder="Tulis keluhan, kritik, saran, atau laporan kamu..." required></textarea><br><br>
-
-        <button type="submit" name="kirim">Kirim ke Admin</button>
-    </form>
-
-</body>
-</html>
