@@ -106,7 +106,21 @@ $foto_produk = mysqli_query($koneksi, "SELECT * FROM produk_foto WHERE id_produk
 
         <label>Deskripsi Produk</label><br>
         <textarea name="deskripsi" rows="5" required><?php echo $produk['deskripsi']; ?></textarea><br><br>
+        <label>Kondisi Barang</label><br>
+<select name="kondisi_barang" required>
+    <option value="">-- Pilih Kondisi Barang --</option>
+    <option value="Baru" <?php if ($produk['kondisi_barang'] == 'Baru') echo "selected"; ?>>Baru</option>
+    <option value="Bekas Like New" <?php if ($produk['kondisi_barang'] == 'Bekas Like New') echo "selected"; ?>>Bekas Like New</option>
+    <option value="Bekas Baik" <?php if ($produk['kondisi_barang'] == 'Bekas Baik') echo "selected"; ?>>Bekas Baik</option>
+    <option value="Bekas Normal" <?php if ($produk['kondisi_barang'] == 'Bekas Normal') echo "selected"; ?>>Bekas Normal</option>
+    <option value="Bekas Minus" <?php if ($produk['kondisi_barang'] == 'Bekas Minus') echo "selected"; ?>>Bekas Minus</option>
+</select><br><br>
 
+<label>Ukuran</label><br>
+<input type="text" name="ukuran" value="<?php echo htmlspecialchars($produk['ukuran']); ?>" required><br><br>
+
+<label>Merek</label><br>
+<input type="text" name="merek" value="<?php echo htmlspecialchars($produk['merek']); ?>" required><br><br>
         <label>Alamat Produk</label><br>
         <textarea name="alamat_produk" rows="3" required><?php echo $produk['alamat_produk']; ?></textarea><br><br>
 

@@ -19,6 +19,9 @@ if (isset($_POST['update'])) {
     $id_kategori = mysqli_real_escape_string($koneksi, $_POST['id_kategori']);
     $nama_produk = mysqli_real_escape_string($koneksi, $_POST['nama_produk']);
     $deskripsi = mysqli_real_escape_string($koneksi, $_POST['deskripsi']);
+    $kondisi_barang = mysqli_real_escape_string($koneksi, $_POST['kondisi_barang']);
+    $ukuran = mysqli_real_escape_string($koneksi, $_POST['ukuran']);
+    $merek = mysqli_real_escape_string($koneksi, $_POST['merek']);
     $alamat_produk = mysqli_real_escape_string($koneksi, $_POST['alamat_produk']);
     $harga = mysqli_real_escape_string($koneksi, $_POST['harga']);
     $keterangan_nego = mysqli_real_escape_string($koneksi, $_POST['keterangan_nego']);
@@ -29,6 +32,9 @@ if (isset($_POST['update'])) {
         empty($id_kategori) ||
         empty($nama_produk) ||
         empty($deskripsi) ||
+        empty($kondisi_barang) ||
+        empty($ukuran) ||
+        empty($merek) ||
         empty($alamat_produk) ||
         empty($harga) ||
         empty($keterangan_nego) ||
@@ -38,7 +44,6 @@ if (isset($_POST['update'])) {
         exit;
     }
 
-    // Pastikan produk milik penjual yang login
     $cek_produk = mysqli_query($koneksi, "SELECT * FROM produk 
         WHERE id_produk='$id_produk' 
         AND id_user='$id_user'
@@ -49,11 +54,13 @@ if (isset($_POST['update'])) {
         exit;
     }
 
-    // Update data produk
     $update_produk = mysqli_query($koneksi, "UPDATE produk SET
         id_kategori='$id_kategori',
         nama_produk='$nama_produk',
         deskripsi='$deskripsi',
+        kondisi_barang='$kondisi_barang',
+        ukuran='$ukuran',
+        merek='$merek',
         alamat_produk='$alamat_produk',
         harga='$harga',
         keterangan_nego='$keterangan_nego',
@@ -67,7 +74,6 @@ if (isset($_POST['update'])) {
         exit;
     }
 
-    // Jika user upload foto baru
     if (!empty($_FILES['foto_produk']['name'][0])) {
         if (count($_FILES['foto_produk']['name']) > 3) {
             header("Location: edit_produk.php?id=$id_produk&pesan=foto_lebih");
@@ -85,7 +91,6 @@ if (isset($_POST['update'])) {
             }
         }
 
-        // Hapus foto lama dari folder
         $foto_lama = mysqli_query($koneksi, "SELECT * FROM produk_foto WHERE id_produk='$id_produk'");
 
         while ($foto = mysqli_fetch_assoc($foto_lama)) {
@@ -96,10 +101,8 @@ if (isset($_POST['update'])) {
             }
         }
 
-        // Hapus foto lama dari database
         mysqli_query($koneksi, "DELETE FROM produk_foto WHERE id_produk='$id_produk'");
 
-        // Simpan foto baru
         foreach ($_FILES['foto_produk']['name'] as $index => $nama_file) {
             $tmp_file = $_FILES['foto_produk']['tmp_name'][$index];
             $ekstensi = strtolower(pathinfo($nama_file, PATHINFO_EXTENSION));

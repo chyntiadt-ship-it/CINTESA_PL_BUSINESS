@@ -14,9 +14,13 @@ if ($_SESSION['role'] != 'penjual') {
 
 if (isset($_POST['simpan'])) {
     $id_user = $_SESSION['id_user'];
+
     $id_kategori = mysqli_real_escape_string($koneksi, $_POST['id_kategori']);
     $nama_produk = mysqli_real_escape_string($koneksi, $_POST['nama_produk']);
     $deskripsi = mysqli_real_escape_string($koneksi, $_POST['deskripsi']);
+    $kondisi_barang = mysqli_real_escape_string($koneksi, $_POST['kondisi_barang']);
+    $ukuran = mysqli_real_escape_string($koneksi, $_POST['ukuran']);
+    $merek = mysqli_real_escape_string($koneksi, $_POST['merek']);
     $alamat_produk = mysqli_real_escape_string($koneksi, $_POST['alamat_produk']);
     $harga = mysqli_real_escape_string($koneksi, $_POST['harga']);
     $keterangan_nego = mysqli_real_escape_string($koneksi, $_POST['keterangan_nego']);
@@ -26,6 +30,9 @@ if (isset($_POST['simpan'])) {
         empty($id_kategori) ||
         empty($nama_produk) ||
         empty($deskripsi) ||
+        empty($kondisi_barang) ||
+        empty($ukuran) ||
+        empty($merek) ||
         empty($alamat_produk) ||
         empty($harga) ||
         empty($keterangan_nego) ||
@@ -52,9 +59,33 @@ if (isset($_POST['simpan'])) {
     }
 
     $simpan_produk = mysqli_query($koneksi, "INSERT INTO produk 
-        (id_user, id_kategori, nama_produk, deskripsi, alamat_produk, harga, keterangan_nego, status_produk)
+        (
+            id_user,
+            id_kategori,
+            nama_produk,
+            deskripsi,
+            kondisi_barang,
+            ukuran,
+            merek,
+            alamat_produk,
+            harga,
+            keterangan_nego,
+            status_produk
+        )
         VALUES 
-        ('$id_user', '$id_kategori', '$nama_produk', '$deskripsi', '$alamat_produk', '$harga', '$keterangan_nego', '$status_produk')
+        (
+            '$id_user',
+            '$id_kategori',
+            '$nama_produk',
+            '$deskripsi',
+            '$kondisi_barang',
+            '$ukuran',
+            '$merek',
+            '$alamat_produk',
+            '$harga',
+            '$keterangan_nego',
+            '$status_produk'
+        )
     ");
 
     if ($simpan_produk) {

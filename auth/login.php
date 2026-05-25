@@ -1,6 +1,41 @@
 <?php
 session_start();
+include '../include/koneksi.php';
 
+if (isset($_POST['login'])) {
+    $email_username = mysqli_real_escape_string($koneksi, $_POST['email_username']);
+    $password = mysqli_real_escape_string($koneksi, $_POST['password']);
+
+    $query = mysqli_query($koneksi, "SELECT * FROM user 
+        WHERE email='$email_username' OR username='$email_username'
+        LIMIT 1
+    ");
+
+    if (mysqli_num_rows($query) > 0) {
+        $user = mysqli_fetch_assoc($query);
+
+        if ($password == $user['password']) {
+            $_SESSION['id_user'] = $user['id_user'];
+            $_SESSION['username'] = $user['username'];
+            $_SESSION['role'] = $user['role'];
+
+            if ($user['role'] == 'admin') {
+                header("Location: ../admin/dashboard.php");
+                exit;
+            } elseif ($user['role'] == 'penjual') {
+                header("Location: ../penjual/dashboard.php");
+                exit;
+            } elseif ($user['role'] == 'pembeli') {
+                header("Location: ../pembeli/dashboard.php");
+                exit;
+            }
+        } else {
+            $error = true;
+        }
+    } else {
+        $error = true;
+    }
+}
 if (isset($_SESSION['id_user'])) {
     if ($_SESSION['role'] == 'admin') {
         header("Location: ../admin/dashboard.php");

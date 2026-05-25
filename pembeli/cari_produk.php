@@ -12,10 +12,6 @@ if ($_SESSION['role'] != 'pembeli') {
     exit;
 }
 
-// Ambil data kategori untuk filter
-$kategori = mysqli_query($koneksi, "SELECT * FROM kategori ORDER BY nama_kategori ASC");
-
-// Ambil keyword dan kategori dari form pencarian
 $keyword = "";
 $id_kategori = "";
 
@@ -27,7 +23,8 @@ if (isset($_GET['id_kategori'])) {
     $id_kategori = mysqli_real_escape_string($koneksi, $_GET['id_kategori']);
 }
 
-// Query dasar produk
+$kategori = mysqli_query($koneksi, "SELECT * FROM kategori ORDER BY nama_kategori ASC");
+
 $query_produk = "SELECT produk.*, kategori.nama_kategori, user.username 
     FROM produk
     JOIN kategori ON produk.id_kategori = kategori.id_kategori
@@ -35,12 +32,10 @@ $query_produk = "SELECT produk.*, kategori.nama_kategori, user.username
     WHERE produk.status_produk = 'Tersedia'
 ";
 
-// Filter keyword
 if (!empty($keyword)) {
     $query_produk .= " AND produk.nama_produk LIKE '%$keyword%'";
 }
 
-// Filter kategori
 if (!empty($id_kategori)) {
     $query_produk .= " AND produk.id_kategori = '$id_kategori'";
 }
@@ -54,103 +49,165 @@ $produk = mysqli_query($koneksi, $query_produk);
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>Cari Produk - Pree Love</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cari Produk - CINTESA</title>
+    <link rel="stylesheet" href="../assets/css/cari_produk.css?v=5">
 </head>
 <body>
 
-    <h2>Cari Produk</h2>
+<main class="search-page">
 
-    <a href="dashboard.php">Kembali ke Dashboard</a>
+    <header class="search-header">
+        <a href="dashboard.php" class="back-btn">‹</a>
 
-    <hr>
+        <form action="" method="GET" class="search-form" autocomplete="off">
+            <span class="search-icon">⌕</span>
 
-    <form action="" method="GET">
-        <label>Cari Nama Produk</label><br>
-        <input type="text" name="keyword" placeholder="Contoh: hoodie, dress, celana" value="<?php echo $keyword; ?>">
-        <br><br>
+            <input
+                type="text"
+                name="keyword"
+                id="searchInput"
+                placeholder="Cari produk di CINTESA"
+                value="<?php echo htmlspecialchars($keyword); ?>"
+            >
 
-        <label>Pilih Kategori</label><br>
-        <select name="id_kategori">
-            <option value="">Semua Kategori</option>
+            <select name="id_kategori">
+                <option value="">Semua Kategori</option>
 
-            <?php while ($row = mysqli_fetch_assoc($kategori)) { ?>
-                <option value="<?php echo $row['id_kategori']; ?>"
-                    <?php if ($id_kategori == $row['id_kategori']) echo "selected"; ?>>
-                    <?php echo $row['nama_kategori']; ?>
-                </option>
+                <?php while ($row = mysqli_fetch_assoc($kategori)) { ?>
+                    <option value="<?php echo $row['id_kategori']; ?>"
+                        <?php if ($id_kategori == $row['id_kategori']) echo "selected"; ?>>
+                        <?php echo htmlspecialchars($row['nama_kategori']); ?>
+                    </option>
+                <?php } ?>
+            </select>
+
+            <button type="submit">Cari</button>
+        </form>
+    </header>
+
+    <section class="search-card">
+        <div class="section-head">
+            <h2>Terakhir dicari</h2>
+            <button type="button" id="clearHistory">Hapus Semua</button>
+        </div>
+
+        <div class="history-list" id="historyList"></div>
+
+        <div class="history-more-wrap" id="historyMoreWrap"></div>
+    </section>
+
+    <section class="search-card">
+        <div class="section-head">
+            <h2>Pencarian Populer</h2>
+            <button type="button" id="refreshPopular">Refresh</button>
+        </div>
+
+        <div class="popular-list">
+            <a href="cari_produk.php?keyword=Fashion" class="popular-item">
+                <span>👕</span>
+                <div>
+                    <h3>Fashion</h3>
+                    <p>10.6 rb pencarian</p>
+                </div>
+            </a>
+
+            <a href="cari_produk.php?keyword=Elektronik" class="popular-item">
+                <span>💻</span>
+                <div>
+                    <h3>Elektronik</h3>
+                    <p>13.7 rb pencarian</p>
+                </div>
+            </a>
+
+            <a href="cari_produk.php?keyword=Buku" class="popular-item">
+                <span>📚</span>
+                <div>
+                    <h3>Buku</h3>
+                    <p>8.5 rb pencarian</p>
+                </div>
+            </a>
+
+            <a href="cari_produk.php?keyword=Furnitur" class="popular-item">
+                <span>🪑</span>
+                <div>
+                    <h3>Furnitur</h3>
+                    <p>7.2 rb pencarian</p>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <section class="result-section">
+        <h2>Hasil Produk</h2>
+
+        <div class="product-grid">
+
+            <?php if (mysqli_num_rows($produk) > 0) { ?>
+
+                <?php while ($row = mysqli_fetch_assoc($produk)) { 
+                    $id_produk = $row['id_produk'];
+
+                    $foto_query = mysqli_query($koneksi, "
+                        SELECT * FROM produk_foto
+                        WHERE id_produk='$id_produk'
+                        LIMIT 1
+                    ");
+
+                    $foto = mysqli_fetch_assoc($foto_query);
+                ?>
+
+                    <div class="product-card">
+                        <?php if (!empty($foto['foto'])) { ?>
+                            <img
+                                src="../uploads/produk/<?php echo htmlspecialchars($foto['foto']); ?>"
+                                class="product-image"
+                                alt="<?php echo htmlspecialchars($row['nama_produk']); ?>"
+                            >
+                        <?php } else { ?>
+                            <div class="no-image">Tidak ada foto</div>
+                        <?php } ?>
+
+                        <div class="product-content">
+                            <span class="product-category">
+                                <?php echo htmlspecialchars($row['nama_kategori']); ?>
+                            </span>
+
+                            <h3><?php echo htmlspecialchars($row['nama_produk']); ?></h3>
+
+                            <p class="product-price">
+                                Rp<?php echo number_format($row['harga'], 0, ',', '.'); ?>
+                            </p>
+
+                            <p class="product-location">
+                                📍 <?php echo htmlspecialchars($row['alamat_produk']); ?>
+                            </p>
+
+                            <p class="product-seller">
+                                👤 <?php echo htmlspecialchars($row['username']); ?>
+                            </p>
+
+                            <a href="detail_produk.php?id=<?php echo $row['id_produk']; ?>" class="detail-btn">
+                                Lihat Detail
+                            </a>
+                        </div>
+                    </div>
+
+                <?php } ?>
+
+            <?php } else { ?>
+
+                <div class="empty-box">
+                    Produk tidak ditemukan.
+                </div>
+
             <?php } ?>
 
-        </select>
-        <br><br>
+        </div>
+    </section>
 
-        <button type="submit">Cari Produk</button>
-        <a href="cari_produk.php">Reset</a>
-    </form>
+</main>
 
-    <hr>
-
-    <h3>Daftar Produk</h3>
-
-    <table border="1" cellpadding="10" cellspacing="0">
-        <tr>
-            <th>No</th>
-            <th>Foto</th>
-            <th>Nama Produk</th>
-            <th>Kategori</th>
-            <th>Harga</th>
-            <th>Lokasi</th>
-            <th>Penjual</th>
-            <th>Aksi</th>
-        </tr>
-
-        <?php
-        $no = 1;
-
-        if (mysqli_num_rows($produk) > 0) {
-            while ($row = mysqli_fetch_assoc($produk)) {
-                $id_produk = $row['id_produk'];
-
-                $foto_query = mysqli_query($koneksi, "SELECT * FROM produk_foto 
-                    WHERE id_produk='$id_produk' 
-                    LIMIT 1
-                ");
-
-                $foto = mysqli_fetch_assoc($foto_query);
-        ?>
-
-        <tr>
-            <td><?php echo $no++; ?></td>
-
-            <td>
-                <?php if (!empty($foto['foto'])) { ?>
-                    <img src="../uploads/produk/<?php echo $foto['foto']; ?>" width="90">
-                <?php } else { ?>
-                    Tidak ada foto
-                <?php } ?>
-            </td>
-
-            <td><?php echo $row['nama_produk']; ?></td>
-            <td><?php echo $row['nama_kategori']; ?></td>
-            <td>Rp<?php echo number_format($row['harga'], 0, ',', '.'); ?></td>
-            <td><?php echo $row['alamat_produk']; ?></td>
-            <td><?php echo $row['username']; ?></td>
-            <td>
-                <a href="detail_produk.php?id=<?php echo $row['id_produk']; ?>">Lihat Detail</a>
-            </td>
-        </tr>
-
-        <?php
-            }
-        } else {
-        ?>
-
-        <tr>
-            <td colspan="8">Produk tidak ditemukan.</td>
-        </tr>
-
-        <?php } ?>
-
-    </table>
-
+<script src="../assets/js/cari_produk.js?v=5"></script>
 </body>
 </html>

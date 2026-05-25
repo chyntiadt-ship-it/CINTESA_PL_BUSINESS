@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if (isset($_SESSION['id_user'])) {
+/*if (isset($_SESSION['id_user'])) {
     if ($_SESSION['role'] == 'admin') {
         header("Location: admin/dashboard.php");
         exit;
@@ -13,6 +13,7 @@ if (isset($_SESSION['id_user'])) {
         exit;
     }
 }
+    */
 ?>
 
 <!DOCTYPE html>
@@ -38,10 +39,6 @@ if (isset($_SESSION['id_user'])) {
     <div class="nav-actions">
         <a href="#" class="nav-icon" aria-label="Notifikasi">♧</a>
         <a href="auth/login.php" class="nav-link">Login</a>
-
-        <button class="theme-toggle" id="themeToggle" aria-label="Ganti tema">
-            <span id="themeIcon">☾</span>
-        </button>
     </div>
 </header>
 
