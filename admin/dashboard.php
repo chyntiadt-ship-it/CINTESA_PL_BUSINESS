@@ -30,7 +30,7 @@ $data_pembeli = mysqli_fetch_assoc($total_pembeli);
 <head>
     <meta charset="UTF-8">
     <title>Dashboard Admin - Pree Love</title>
-    <link rel="stylesheet" href="../assets/css/admin.css">
+    <link rel="stylesheet" href="../assets/css/admin.css?v=13">
 </head>
 <body>
 
@@ -39,7 +39,7 @@ $data_pembeli = mysqli_fetch_assoc($total_pembeli);
     <aside class="sidebar">
         <div class="sidebar-logo">
             <div class="logo-circle">P</div>
-            <h2>Pree Love</h2>
+            <h2>CINTESA</h2>
         </div>
 
         <nav class="sidebar-menu">
