@@ -27,9 +27,19 @@ function penjual_page_start($title, $active = 'dashboard', $search_value = '') {
         >
     </form>
 
+    <?php
+    $current_page = basename($_SERVER['PHP_SELF']);
+    ?>
+    
     <div class="nav-actions">
-        <a href="tambah_produk.php" class="nav-btn primary">＋ Produk</a>
-        <a href="pesan.php" class="nav-btn">▣</a>
+        <?php if ($current_page != 'produk.php') { ?>
+            <a href="tambah_produk.php" class="nav-btn primary">
+                <img src="../assets/icons/penjual/add-product.png" class="nav-icon" alt="">
+            </a>
+        <?php } ?>
+            <a href="pesan.php" class="nav-btn">
+                <img src="../assets/icons/chat.png" class="nav-icon" alt="">
+            </a>
     </div>
 </header>
 
@@ -41,23 +51,28 @@ function penjual_page_start($title, $active = 'dashboard', $search_value = '') {
 
     <nav>
         <a href="dashboard.php" class="<?php echo $active == 'dashboard' ? 'active' : ''; ?>">
-            ⌂ Dashboard
+            <img src="../assets/icons/home.png" class="side-icon" alt="">
+            <span>Dashboard</span>
         </a>
-
+        
         <a href="profile.php" class="<?php echo $active == 'profile' ? 'active' : ''; ?>">
-            ◉ Profil
+            <img src="../assets/icons/user.png" class="side-icon" alt="">
+            <span>Profil</span>
         </a>
-
+        
         <a href="produk.php" class="<?php echo $active == 'produk' ? 'active' : ''; ?>">
-            ▦ Manajemen Produk
+            <img src="../assets/icons/penjual/product-management.png" class="side-icon" alt="">
+            <span>Manajemen Produk</span>
         </a>
-
+        
         <a href="customer_service.php" class="<?php echo $active == 'cs' ? 'active' : ''; ?>">
-            ? Customer Service
+            <img src="../assets/icons/call-center.png" class="side-icon" alt="">
+            <span>Customer Service</span>
         </a>
-
+        
         <a href="../auth/logout.php">
-            ⎋ Logout
+            <img src="../assets/icons/logout.png" class="side-icon" alt="">
+            <span>Logout</span>
         </a>
     </nav>
 </aside>
