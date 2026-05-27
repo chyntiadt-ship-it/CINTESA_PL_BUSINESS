@@ -1,0 +1,40 @@
+.back-btn {
+    text-decoration: none;
+}
+
+.manajemen-postingan-page .admin-header {
+    margin-bottom: 36px;
+}
+
+.manajemen-postingan-page .admin-header p {
+    max-width: 700px;
+    margin: auto;
+}
+
+.manajemen-postingan-page .table-card {
+    animation: fadeUp 0.8s ease;
+}
+
+.manajemen-postingan-page .admin-table td small {
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.manajemen-postingan-page .status-badge {
+    background: rgba(157,189,177,0.28);
+}
+
+.manajemen-postingan-page .empty-data {
+    padding: 40px 20px;
+}
+
+@media (max-width: 768px) {
+
+    .manajemen-postingan-page .admin-header {
+        margin-bottom: 28px;
+    }
+
+    .manajemen-postingan-page .admin-header h1 {
+        line-height: 1.2;
+    }
+}
