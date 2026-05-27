@@ -1,5 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:wght@700&display=swap');
 
+/* ===============================
+   1. GLOBAL
+   =============================== */
 * {
     margin: 0;
     padding: 0;
@@ -40,7 +43,9 @@ select {
     font-family: inherit;
 }
 
-/* NAVBAR */
+/* ===============================
+   2. NAVBAR
+   =============================== */
 .top-navbar {
     position: fixed;
     top: 22px;
@@ -83,7 +88,6 @@ select {
     font-size: 30px;
 }
 
-/* search dibuat center seperti buyer */
 .search-box {
     position: absolute;
     left: 50%;
@@ -109,8 +113,13 @@ select {
 
 .nav-actions {
     display: flex;
+    align-items: center;
     justify-content: flex-end;
     gap: 10px;
+}
+
+.nav-actions .primary {
+    display: inline-flex;
 }
 
 .nav-btn {
@@ -120,6 +129,8 @@ select {
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    gap: 8px;
+    overflow: hidden;
     border-radius: 18px;
     border: 1px solid var(--border);
     background: rgba(255,255,255,.92);
@@ -133,7 +144,20 @@ select {
     color: #fff;
 }
 
-/* SIDEBAR */
+.nav-icon {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.nav-btn.primary .nav-icon {
+    filter: invert(1);
+}
+
+/* ===============================
+   3. SIDEBAR
+   =============================== */
 .sidebar {
     position: fixed;
     top: 18px;
@@ -175,6 +199,9 @@ select {
 }
 
 .sidebar nav a {
+    display: flex;
+    align-items: center;
+    gap: 14px;
     padding: 18px;
     border-radius: 14px;
     font-weight: 800;
@@ -186,7 +213,21 @@ select {
     color: var(--blue);
 }
 
-/* MAIN */
+.side-icon {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.sidebar nav a.active .side-icon,
+.sidebar nav a:hover .side-icon {
+    opacity: .85;
+}
+
+/* ===============================
+   4. MAIN, CARD, GRID
+   =============================== */
 .seller-main {
     width: min(1180px, 92%);
     margin: 0 auto;
@@ -223,7 +264,6 @@ select {
     font-weight: 600;
 }
 
-/* CARD & GRID */
 .stats-grid,
 .product-grid,
 .form-grid,
@@ -294,7 +334,36 @@ select {
     margin-bottom: 24px;
 }
 
-/* PRODUCT */
+/* ===============================
+   5. DASHBOARD
+   =============================== */
+.dashboard-only {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.dashboard-only .stat-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 170px;
+}
+
+.dashboard-only .stat-card h3 {
+    margin: 0 0 12px;
+    font-size: 18px;
+}
+
+.dashboard-only .stat-card strong {
+    font-size: 34px;
+    line-height: 1;
+}
+
+/* ===============================
+   6. PRODUCT LIST
+   =============================== */
 .product-card {
     overflow: hidden;
     border-radius: 24px;
@@ -361,7 +430,9 @@ select {
     color: var(--blue);
 }
 
-/* FORM & BUTTON */
+/* ===============================
+   7. FORM, BUTTON, ALERT
+   =============================== */
 .btn,
 .action-btn {
     border: 0;
@@ -383,6 +454,11 @@ select {
     color: #9b1c12;
 }
 
+.btn-danger-confirm {
+    background: #9b1c12;
+    color: #fff;
+}
+
 .field-group {
     display: flex;
     flex-direction: column;
@@ -395,6 +471,11 @@ select {
 
 .field-group label {
     font-weight: 900;
+}
+
+.field-group label span,
+.service-form label span {
+    color: #9b1c12;
 }
 
 .field-group input,
@@ -438,7 +519,9 @@ select {
     color: var(--muted);
 }
 
-/* PROFILE */
+/* ===============================
+   8. PROFILE PENJUAL
+   =============================== */
 .profile-card {
     text-align: center;
 }
@@ -460,230 +543,6 @@ select {
     font-weight: 900;
 }
 
-/* CHAT */
-.chat-list {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-}
-
-.chat-card {
-    display: grid;
-    grid-template-columns: 58px 1fr 24px;
-    align-items: center;
-    gap: 16px;
-    padding: 18px;
-    border-radius: 20px;
-    background: #fff;
-    border: 1px solid var(--border);
-}
-
-.chat-avatar {
-    width: 54px;
-    height: 54px;
-    border-radius: 50%;
-    background: var(--blue);
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 900;
-}
-
-.chat-panel {
-    overflow: hidden;
-}
-
-.chat-header-panel {
-    padding: 22px;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    border-bottom: 1px solid var(--border);
-}
-
-.chat-body {
-    height: 430px;
-    overflow-y: auto;
-    padding: 24px;
-    background: rgba(255,255,255,.5);
-}
-
-.message-row {
-    display: flex;
-    margin-bottom: 14px;
-}
-
-.message-row.me {
-    justify-content: flex-end;
-}
-
-.message-bubble {
-    max-width: 70%;
-    padding: 14px 16px;
-    border-radius: 18px;
-    background: #fff;
-    border: 1px solid var(--border);
-}
-
-.message-row.me .message-bubble {
-    background: #111;
-    color: #fff;
-}
-
-.chat-input-panel {
-    padding: 18px;
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 12px;
-    border-top: 1px solid var(--border);
-}
-
-.chat-input-panel textarea {
-    resize: none;
-    border: 1px solid var(--border);
-    border-radius: 18px;
-    padding: 14px;
-    outline: 0;
-}
-
-/* RESPONSIVE */
-@media (max-width: 1100px) {
-    .search-box {
-        width: min(520px, 42vw);
-    }
-
-    .stats-grid,
-    .product-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .seller-main {
-        width: 94%;
-    }
-}
-
-@media (max-width: 768px) {
-    .top-navbar {
-        top: 14px;
-        left: 14px;
-        right: 14px;
-        height: 68px;
-        grid-template-columns: 42px 1fr auto;
-        padding: 0 16px;
-        border-radius: 22px;
-    }
-
-    .nav-logo {
-        font-size: 25px;
-    }
-
-    .search-box {
-        display: none;
-    }
-
-    .nav-actions .primary {
-        display: none;
-    }
-
-    .nav-btn {
-        width: 46px;
-        min-width: 46px;
-        height: 46px;
-        padding: 0;
-    }
-
-    .seller-main {
-        width: calc(100% - 28px);
-        padding-top: 120px;
-    }
-
-    .hero-dashboard,
-    .page-hero {
-        margin-bottom: 28px;
-    }
-
-    .hero-dashboard h1,
-    .page-hero h1 {
-        font-size: 30px;
-        line-height: 1.25;
-    }
-
-    .hero-dashboard p,
-    .page-hero p {
-        font-size: 16px;
-        line-height: 1.7;
-    }
-
-    .stats-grid,
-    .product-grid,
-    .form-grid,
-    .profile-layout,
-    .action-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .toolbar,
-    .section-head {
-        align-items: flex-start;
-        flex-direction: column;
-    }
-
-    .sidebar {
-        top: 12px;
-        left: -110%;
-        width: min(310px, calc(100vw - 24px));
-        height: calc(100vh - 24px);
-        border-radius: 22px;
-    }
-
-    .sidebar.active {
-        left: 12px;
-    }
-}
-
-@media (max-width: 480px) {
-    .top-navbar {
-        top: 10px;
-        left: 10px;
-        right: 10px;
-        height: 64px;
-        grid-template-columns: 38px 1fr 42px;
-        gap: 8px;
-        padding: 0 12px;
-    }
-
-    .menu-toggle {
-        font-size: 28px;
-    }
-
-    .nav-logo {
-        font-size: 22px;
-    }
-
-    .seller-main {
-        width: calc(100% - 20px);
-        padding-top: 108px;
-    }
-
-    .hero-dashboard h1,
-    .page-hero h1 {
-        font-size: 27px;
-    }
-
-    .stat-card {
-        min-height: 150px;
-    }
-
-    .panel,
-    .form-panel,
-    .profile-card,
-    .chat-panel {
-        border-radius: 22px;
-    }
-}
-
-/* PROFILE PENJUAL */
 .profile-page-head {
     text-align: center;
     margin-bottom: 34px;
@@ -823,98 +682,9 @@ select {
     display: flex;
 }
 
-/* RESPONSIVE PROFILE */
-@media (max-width: 900px) {
-    .profile-seller-card {
-        grid-template-columns: 1fr;
-        width: 100%;
-        padding: 24px;
-        gap: 24px;
-    }
-
-    .profile-page-head {
-        text-align: center;
-        margin-bottom: 26px;
-    }
-
-    .photo-wrapper,
-    .seller-photo {
-        width: 175px;
-        height: 175px;
-    }
-}
-
-@media (max-width: 768px) {
-    .sidebar {
-        width: 60vw;
-        left: -70vw;
-    }
-
-    .sidebar.active {
-        left: 12px;
-    }
-
-    .sidebar nav a {
-        padding: 15px 14px;
-        font-size: 14px;
-    }
-
-    .profile-seller-card {
-        padding: 22px;
-        border-radius: 24px;
-    }
-
-    .profile-photo-side {
-        padding: 22px;
-    }
-}
-
-@media (max-width: 480px) {
-    .sidebar {
-        width: 60vw;
-        left: -70vw;
-        padding: 22px 12px;
-    }
-
-    .sidebar.active {
-        left: 10px;
-    }
-
-    .sidebar-head h2 {
-        font-size: 22px;
-    }
-
-    .sidebar nav a {
-        padding: 14px 10px;
-        font-size: 13px;
-    }
-
-    .profile-page-head h1 {
-        font-size: 30px;
-    }
-
-    .profile-seller-card {
-        padding: 16px;
-    }
-
-    .profile-photo-side {
-        padding: 18px;
-    }
-
-    .photo-wrapper,
-    .seller-photo {
-        width: 155px;
-        height: 155px;
-    }
-
-    .edit-photo-btn {
-        width: 42px;
-        height: 42px;
-        bottom: 14px;
-    }
-}
-
-/* TAMBAH PRODUK */
+/* ===============================
+   9. TAMBAH & EDIT PRODUK
+   =============================== */
 .add-product-hero {
     text-align: center;
     margin-bottom: 30px;
@@ -933,6 +703,10 @@ select {
     box-shadow: var(--shadow);
 }
 
+.edit-product-card {
+    align-items: flex-start;
+}
+
 .upload-panel {
     padding: 24px;
     border-radius: 26px;
@@ -941,6 +715,7 @@ select {
 }
 
 .upload-box {
+    position: relative;
     min-height: 210px;
     padding: 24px;
     border-radius: 24px;
@@ -956,9 +731,18 @@ select {
     transition: .25s ease;
 }
 
-.upload-box:hover {
-    background: #eef4f7;
+.upload-box:hover,
+.upload-box.drag-active {
+    background: #dfeaf2;
     border-color: var(--blue);
+}
+
+.upload-box.drag-active {
+    transform: scale(1.02);
+}
+
+.upload-box.drag-active .upload-icon {
+    transform: rotate(90deg);
 }
 
 .upload-icon {
@@ -978,10 +762,14 @@ select {
     font-size: 18px;
 }
 
-.upload-box small {
+.upload-box small,
+.upload-box em {
     color: var(--muted);
+    font-size: 13px;
+    font-style: normal;
     font-weight: 600;
     line-height: 1.5;
+    text-align: center;
 }
 
 .preview-grid {
@@ -1002,6 +790,7 @@ select {
 }
 
 .preview-item {
+    position: relative;
     height: 105px;
     overflow: hidden;
     border-radius: 18px;
@@ -1015,12 +804,20 @@ select {
     object-fit: cover;
 }
 
-.product-form-panel {
-    padding: 6px;
+.preview-item span {
+    position: absolute;
+    left: 8px;
+    bottom: 8px;
+    padding: 5px 8px;
+    border-radius: 999px;
+    background: rgba(0,0,0,.65);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 800;
 }
 
-.field-group label span {
-    color: #9b1c12;
+.product-form-panel {
+    padding: 6px;
 }
 
 .add-actions {
@@ -1028,46 +825,16 @@ select {
     margin-top: 24px;
 }
 
-@media (max-width: 900px) {
-    .add-product-card {
-        grid-template-columns: 1fr;
-        padding: 24px;
-        gap: 24px;
-    }
-
-    .upload-box {
-        min-height: 180px;
-    }
+.current-photo-title {
+    margin-top: 18px;
+    color: var(--text);
+    font-weight: 900;
+    text-align: center;
 }
 
-@media (max-width: 480px) {
-    .add-product-card {
-        padding: 16px;
-        border-radius: 24px;
-    }
-
-    .upload-panel {
-        padding: 18px;
-    }
-
-    .preview-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .preview-item {
-        height: 180px;
-    }
-
-    .add-actions {
-        flex-direction: column-reverse;
-    }
-
-    .add-actions .btn {
-        width: 100%;
-    }
-}
-
-/* PESAN PENJUAL */
+/* ===============================
+   10. PESAN MASUK
+   =============================== */
 .messages-hero {
     text-align: center;
     margin-bottom: 30px;
@@ -1125,6 +892,7 @@ select {
 .message-avatar {
     width: 58px;
     height: 58px;
+    overflow: hidden;
     border-radius: 50%;
     background: #111;
     color: #fff;
@@ -1133,6 +901,12 @@ select {
     justify-content: center;
     font-size: 22px;
     font-weight: 900;
+}
+
+.message-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .message-content {
@@ -1150,11 +924,20 @@ select {
     font-size: 18px;
 }
 
-.message-top span {
+.message-top span,
+.message-top small {
     color: var(--muted);
     font-size: 13px;
     font-weight: 700;
+}
+
+.message-top span {
     white-space: nowrap;
+}
+
+.message-top small {
+    display: block;
+    margin-top: 2px;
 }
 
 .message-product {
@@ -1173,49 +956,9 @@ select {
     white-space: nowrap;
 }
 
-@media (max-width: 768px) {
-    .messages-card {
-        padding: 22px;
-        border-radius: 24px;
-    }
-
-    .message-item {
-        grid-template-columns: 52px 1fr;
-        align-items: flex-start;
-    }
-
-    .message-avatar {
-        width: 52px;
-        height: 52px;
-    }
-
-    .message-btn {
-        grid-column: 1 / -1;
-        width: 100%;
-    }
-
-    .message-top {
-        flex-direction: column;
-        gap: 4px;
-    }
-}
-
-@media (max-width: 480px) {
-    .messages-card {
-        padding: 16px;
-    }
-
-    .message-item {
-        padding: 16px;
-        gap: 14px;
-    }
-
-    .message-top h3 {
-        font-size: 16px;
-    }
-}
-
-/* DETAIL CHAT PENJUAL - RESPONSIVE COMPACT */
+/* ===============================
+   11. DETAIL CHAT
+   =============================== */
 .seller-chat-page {
     width: min(920px, 100%);
     margin: 0 auto;
@@ -1233,7 +976,6 @@ select {
     box-shadow: var(--shadow);
 }
 
-/* HEADER CHAT */
 .seller-chat-header {
     display: grid;
     grid-template-columns: 42px 50px 1fr auto;
@@ -1247,14 +989,22 @@ select {
 .chat-back-btn {
     width: 38px;
     height: 38px;
+    padding: 0;
     border-radius: 14px;
     background: #eef4f7;
     border: 1px solid var(--border);
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
     font-size: 20px;
     font-weight: 900;
+}
+
+.back-icon {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
 }
 
 .buyer-avatar-large {
@@ -1266,9 +1016,9 @@ select {
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
     font-size: 18px;
     font-weight: 900;
-    overflow: hidden;
 }
 
 .buyer-avatar-large img {
@@ -1328,7 +1078,6 @@ select {
     font-size: 16px;
 }
 
-/* CATATAN KEAMANAN DIPERKECIL */
 .seller-chat-warning {
     margin: 10px 18px 0;
     padding: 10px 14px;
@@ -1349,7 +1098,6 @@ select {
     line-height: 1.4;
 }
 
-/* AREA CHAT */
 .seller-chat-body {
     flex: 1;
     min-height: 0;
@@ -1396,7 +1144,19 @@ select {
     opacity: .7;
 }
 
-/* QUICK REPLY */
+.chat-image-attachment {
+    width: min(260px, 100%);
+    max-height: 260px;
+    object-fit: cover;
+    display: block;
+    border-radius: 16px;
+    margin-bottom: 8px;
+}
+
+.seller-message-row.me .chat-image-attachment {
+    border: 1px solid rgba(255,255,255,.18);
+}
+
 .seller-quick-replies {
     display: flex;
     gap: 8px;
@@ -1414,10 +1174,10 @@ select {
     cursor: pointer;
 }
 
-/* INPUT CHAT */
 .seller-chat-input {
     display: grid;
-    grid-template-columns: 1fr 48px;
+    grid-template-columns: 44px 1fr 48px;
+    align-items: end;
     gap: 10px;
     padding: 12px 18px 16px;
     border-top: 1px solid var(--border);
@@ -1447,589 +1207,6 @@ select {
     font-weight: 900;
     cursor: pointer;
     align-self: end;
-}
-
-/* TABLET */
-@media (max-width: 768px) {
-    .seller-chat-card {
-        height: calc(100dvh - 125px);
-        min-height: 0;
-        border-radius: 24px;
-    }
-
-    .seller-chat-header {
-        grid-template-columns: 40px 46px 1fr;
-        gap: 10px;
-        padding: 12px 14px;
-    }
-
-    .chat-back-btn {
-        width: 38px;
-        height: 38px;
-    }
-
-    .buyer-avatar-large {
-        width: 46px;
-        height: 46px;
-    }
-
-    .seller-chat-info h1 {
-        font-size: 17px;
-    }
-
-    .chat-product-price {
-        grid-column: 2 / -1;
-        text-align: left;
-        display: flex;
-        gap: 8px;
-        align-items: center;
-    }
-
-    .chat-product-price span {
-        font-size: 11px;
-    }
-
-    .chat-product-price strong {
-        font-size: 14px;
-    }
-
-    .seller-chat-warning {
-        margin: 8px 14px 0;
-        padding: 9px 12px;
-    }
-
-    .seller-chat-warning p {
-        font-size: 12px;
-    }
-
-    .seller-chat-body {
-        padding: 14px;
-    }
-
-    .seller-message-bubble {
-        max-width: 82%;
-    }
-
-    .seller-quick-replies {
-        padding: 0 14px 10px;
-    }
-
-    .seller-chat-input {
-        padding: 10px 14px 14px;
-    }
-}
-
-/* HP KECIL */
-@media (max-width: 480px) {
-    .seller-chat-card {
-        height: calc(100dvh - 112px);
-        border-radius: 22px;
-    }
-
-    .seller-chat-header {
-        grid-template-columns: 38px 1fr;
-        padding: 12px;
-    }
-
-    .buyer-avatar-large {
-        display: none;
-    }
-
-    .seller-chat-info h1 {
-        font-size: 16px;
-    }
-
-    .seller-chat-info p {
-        margin-bottom: 4px;
-    }
-
-    .chat-product-pill {
-        max-width: 190px;
-        font-size: 11px;
-        padding: 5px 9px;
-    }
-
-    .chat-product-price {
-        grid-column: 1 / -1;
-        padding-left: 50px;
-        margin-top: -4px;
-    }
-
-    /* Di HP catatan keamanan dibuat sangat singkat */
-    .seller-chat-warning {
-        margin: 8px 12px 0;
-        padding: 8px 10px;
-    }
-
-    .seller-chat-warning strong {
-        font-size: 12px;
-    }
-
-    .seller-chat-warning p {
-        display: none;
-    }
-
-    .seller-chat-body {
-        padding: 12px;
-    }
-
-    .seller-message-bubble {
-        max-width: 90%;
-        padding: 11px 13px;
-    }
-
-    .seller-message-bubble p {
-        font-size: 14px;
-    }
-
-    .seller-quick-replies {
-        gap: 6px;
-        padding: 0 12px 8px;
-    }
-
-    .seller-quick-replies button {
-        padding: 7px 10px;
-        font-size: 11px;
-    }
-
-    .seller-chat-input {
-        grid-template-columns: 1fr 44px;
-        gap: 8px;
-        padding: 10px 12px 12px;
-    }
-
-    .seller-chat-input textarea {
-        min-height: 44px;
-        padding: 12px;
-        font-size: 14px;
-    }
-
-    .seller-send-btn {
-        width: 44px;
-        height: 44px;
-        border-radius: 14px;
-    }
-}
-
-/* CUSTOMER SERVICE PENJUAL */
-.service-hero {
-    text-align: center;
-    margin-bottom: 30px;
-}
-
-.service-card {
-    width: min(1080px, 100%);
-    margin: 0 auto 28px;
-    display: grid;
-    grid-template-columns: 330px 1fr;
-    gap: 28px;
-    padding: 34px;
-    border-radius: 30px;
-    background: var(--white);
-    border: 1px solid var(--border);
-    box-shadow: var(--shadow);
-}
-
-.service-info {
-    padding: 28px;
-    border-radius: 26px;
-    background: rgba(255,255,255,.68);
-    border: 1px solid var(--border);
-}
-
-.service-icon {
-    width: 62px;
-    height: 62px;
-    margin-bottom: 18px;
-    border-radius: 20px;
-    background: #111;
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 30px;
-    font-weight: 900;
-}
-
-.service-info h2 {
-    margin-bottom: 10px;
-}
-
-.service-info p {
-    color: var(--muted);
-    font-weight: 600;
-    line-height: 1.7;
-}
-
-.service-note {
-    margin-top: 22px;
-    padding: 16px;
-    border-radius: 18px;
-    background: #eef4f7;
-}
-
-.service-note strong {
-    display: block;
-    margin-bottom: 4px;
-}
-
-.service-form {
-    padding: 6px;
-}
-
-.service-form textarea {
-    min-height: 180px;
-    resize: vertical;
-}
-
-.service-form label span {
-    color: #9b1c12;
-}
-
-.service-actions {
-    justify-content: flex-end;
-    margin-top: 22px;
-}
-
-.service-history-card {
-    width: min(1080px, 100%);
-    margin: 0 auto;
-    padding: 30px;
-    border-radius: 30px;
-    background: var(--white);
-    border: 1px solid var(--border);
-    box-shadow: var(--shadow);
-}
-
-.service-history-list {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-}
-
-.service-history-item {
-    padding: 18px;
-    border-radius: 20px;
-    background: rgba(255,255,255,.78);
-    border: 1px solid var(--border);
-}
-
-.service-history-top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    margin-bottom: 8px;
-}
-
-.service-history-item p {
-    color: var(--muted);
-    font-weight: 600;
-    line-height: 1.5;
-    margin-bottom: 8px;
-}
-
-.service-history-item small {
-    color: var(--muted);
-    font-weight: 700;
-}
-
-.status-read,
-.status-unread {
-    padding: 7px 10px;
-    border-radius: 999px;
-    font-size: 12px;
-    font-weight: 900;
-    white-space: nowrap;
-}
-
-.status-read {
-    background: #dff4e8;
-    color: #17643b;
-}
-
-.status-unread {
-    background: #fff0cd;
-    color: #765200;
-}
-
-@media (max-width: 900px) {
-    .service-card {
-        grid-template-columns: 1fr;
-        padding: 24px;
-    }
-
-    .service-history-card {
-        padding: 24px;
-    }
-
-    .service-info {
-        padding: 24px;
-    }
-}
-
-@media (max-width: 480px) {
-    .service-card,
-    .service-history-card {
-        padding: 16px;
-        border-radius: 24px;
-    }
-
-    .service-info {
-        padding: 18px;
-    }
-
-    .service-icon {
-        width: 54px;
-        height: 54px;
-        font-size: 26px;
-    }
-
-    .service-actions .btn {
-        width: 100%;
-    }
-
-    .service-history-top {
-        align-items: flex-start;
-        flex-direction: column;
-    }
-}
-
-/* CENTER CUSTOMER SERVICE INFO */
-.service-info {
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.service-icon {
-    margin: 0 auto 18px;
-}
-
-.service-info h2 {
-    text-align: center;
-}
-
-.service-info > p {
-    text-align: center;
-    max-width: 290px;
-    margin: 0 auto;
-}
-
-.service-note {
-    width: 100%;
-    text-align: center;
-}
-
-.service-note strong,
-.service-note p {
-    text-align: center;
-}
-
-/* DRAG FOTO PRODUK */
-.upload-box {
-    position: relative;
-}
-
-.upload-box em {
-    color: var(--muted);
-    font-size: 13px;
-    font-style: normal;
-    font-weight: 600;
-}
-
-.upload-box.drag-active {
-    background: #dfeaf2;
-    border-color: var(--blue);
-    transform: scale(1.02);
-}
-
-.upload-box.drag-active .upload-icon {
-    transform: rotate(90deg);
-}
-
-.preview-item {
-    position: relative;
-}
-
-.preview-item span {
-    position: absolute;
-    left: 8px;
-    bottom: 8px;
-    padding: 5px 8px;
-    border-radius: 999px;
-    background: rgba(0,0,0,.65);
-    color: #fff;
-    font-size: 11px;
-    font-weight: 800;
-}
-
-/* EDIT PRODUK */
-.edit-product-card {
-    align-items: flex-start;
-}
-
-.current-photo-title {
-    margin-top: 18px;
-    color: var(--text);
-    font-weight: 900;
-    text-align: center;
-}
-
-.upload-box em {
-    color: var(--muted);
-    font-size: 13px;
-    font-style: normal;
-    font-weight: 600;
-    text-align: center;
-}
-
-.upload-box.drag-active {
-    background: #dfeaf2;
-    border-color: var(--blue);
-    transform: scale(1.02);
-}
-
-.preview-item {
-    position: relative;
-}
-
-.preview-item span {
-    position: absolute;
-    left: 8px;
-    bottom: 8px;
-    padding: 5px 8px;
-    border-radius: 999px;
-    background: rgba(0,0,0,.65);
-    color: #fff;
-    font-size: 11px;
-    font-weight: 800;
-}
-
-/* MODAL HAPUS PRODUK */
-.modal-open {
-    overflow: hidden;
-}
-
-.delete-modal {
-    position: fixed;
-    inset: 0;
-    z-index: 3000;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    background: rgba(20, 28, 32, .45);
-    backdrop-filter: blur(8px);
-}
-
-.delete-modal.show {
-    display: flex;
-}
-
-.delete-modal-box {
-    width: min(430px, 100%);
-    padding: 30px;
-    border-radius: 28px;
-    background: rgba(255,255,255,.96);
-    border: 1px solid var(--border);
-    box-shadow: 0 24px 70px rgba(0,0,0,.22);
-    text-align: center;
-    animation: modalPop .22s ease;
-}
-
-.delete-modal-icon {
-    width: 64px;
-    height: 64px;
-    margin: 0 auto 18px;
-    border-radius: 50%;
-    background: #fbe1df;
-    color: #9b1c12;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 34px;
-    font-weight: 900;
-}
-
-.delete-modal-box h2 {
-    margin-bottom: 10px;
-    font-size: 26px;
-}
-
-.delete-modal-box p {
-    color: var(--muted);
-    font-weight: 600;
-    line-height: 1.6;
-}
-
-.delete-modal-box p strong {
-    color: var(--text);
-}
-
-.delete-modal-actions {
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-    margin-top: 24px;
-}
-
-.btn-danger-confirm {
-    background: #9b1c12;
-    color: #fff;
-}
-
-@keyframes modalPop {
-    from {
-        opacity: 0;
-        transform: scale(.94) translateY(10px);
-    }
-
-    to {
-        opacity: 1;
-        transform: scale(1) translateY(0);
-    }
-}
-
-@media (max-width: 480px) {
-    .delete-modal-box {
-        padding: 24px;
-        border-radius: 24px;
-    }
-
-    .delete-modal-actions {
-        flex-direction: column-reverse;
-    }
-
-    .delete-modal-actions .btn {
-        width: 100%;
-    }
-}
-
-/* FOTO PROFIL DI LIST PESAN */
-.message-avatar {
-    overflow: hidden;
-}
-
-.message-avatar img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.message-top small {
-    display: block;
-    margin-top: 2px;
-    color: var(--muted);
-    font-size: 13px;
-    font-weight: 700;
-}
-
-/* ATTACH FOTO CHAT */
-.seller-chat-input {
-    grid-template-columns: 44px 1fr 48px;
-    align-items: end;
 }
 
 .chat-attach-wrapper {
@@ -2111,22 +1288,755 @@ select {
     font-weight: 900;
 }
 
-.chat-image-attachment {
-    width: min(260px, 100%);
-    max-height: 260px;
-    object-fit: cover;
+/* ===============================
+   12. CUSTOMER SERVICE
+   =============================== */
+.service-hero {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.service-card {
+    width: min(1080px, 100%);
+    margin: 0 auto 28px;
+    display: grid;
+    grid-template-columns: 330px 1fr;
+    gap: 28px;
+    padding: 34px;
+    border-radius: 30px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+}
+
+.service-info {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 28px;
+    border-radius: 26px;
+    background: rgba(255,255,255,.68);
+    border: 1px solid var(--border);
+}
+
+.service-icon {
+    width: 62px;
+    height: 62px;
+    margin: 0 auto 18px;
+    border-radius: 20px;
+    background: #111;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    font-weight: 900;
+}
+
+.service-info h2 {
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.service-info > p {
+    max-width: 290px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.service-info p {
+    color: var(--muted);
+    font-weight: 600;
+    line-height: 1.7;
+}
+
+.service-note {
+    width: 100%;
+    margin-top: 22px;
+    padding: 16px;
+    border-radius: 18px;
+    background: #eef4f7;
+    text-align: center;
+}
+
+.service-note strong {
     display: block;
-    border-radius: 16px;
+    margin-bottom: 4px;
+}
+
+.service-note p {
+    text-align: center;
+}
+
+.service-form {
+    padding: 6px;
+}
+
+.service-form textarea {
+    min-height: 180px;
+    resize: vertical;
+}
+
+.service-actions {
+    justify-content: flex-end;
+    margin-top: 22px;
+}
+
+.service-history-card {
+    width: min(1080px, 100%);
+    margin: 0 auto;
+    padding: 30px;
+    border-radius: 30px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+}
+
+.service-history-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.service-history-item {
+    padding: 18px;
+    border-radius: 20px;
+    background: rgba(255,255,255,.78);
+    border: 1px solid var(--border);
+}
+
+.service-history-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
     margin-bottom: 8px;
 }
 
-.seller-message-row.me .chat-image-attachment {
-    border: 1px solid rgba(255,255,255,.18);
+.service-history-item p {
+    color: var(--muted);
+    font-weight: 600;
+    line-height: 1.5;
+    margin-bottom: 8px;
+}
+
+.service-history-item small {
+    color: var(--muted);
+    font-weight: 700;
+}
+
+.status-read,
+.status-unread {
+    padding: 7px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 900;
+    white-space: nowrap;
+}
+
+.status-read {
+    background: #dff4e8;
+    color: #17643b;
+}
+
+.status-unread {
+    background: #fff0cd;
+    color: #765200;
+}
+
+/* ===============================
+   13. MODAL
+   =============================== */
+.modal-open {
+    overflow: hidden;
+}
+
+.delete-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 3000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(20, 28, 32, .45);
+    backdrop-filter: blur(8px);
+}
+
+.delete-modal.show {
+    display: flex;
+}
+
+.delete-modal-box {
+    width: min(430px, 100%);
+    padding: 30px;
+    border-radius: 28px;
+    background: rgba(255,255,255,.96);
+    border: 1px solid var(--border);
+    box-shadow: 0 24px 70px rgba(0,0,0,.22);
+    text-align: center;
+    animation: modalPop .22s ease;
+}
+
+.delete-modal-icon {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 18px;
+    border-radius: 50%;
+    background: #fbe1df;
+    color: #9b1c12;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 34px;
+    font-weight: 900;
+}
+
+.delete-modal-box h2 {
+    margin-bottom: 10px;
+    font-size: 26px;
+}
+
+.delete-modal-box p {
+    color: var(--muted);
+    font-weight: 600;
+    line-height: 1.6;
+}
+
+.delete-modal-box p strong {
+    color: var(--text);
+}
+
+.delete-modal-actions {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+@keyframes modalPop {
+    from {
+        opacity: 0;
+        transform: scale(.94) translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* ===============================
+   14. RESPONSIVE
+   =============================== */
+@media (min-width: 1101px) {
+    .dashboard-only {
+        grid-template-columns: repeat(4, minmax(180px, 1fr));
+        max-width: 1080px;
+    }
+}
+
+@media (max-width: 1100px) {
+    .search-box {
+        width: min(520px, 42vw);
+    }
+
+    .stats-grid,
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .seller-main {
+        width: 94%;
+    }
+
+    .dashboard-only {
+        grid-template-columns: repeat(2, minmax(220px, 1fr));
+        max-width: 720px;
+    }
+}
+
+@media (max-width: 900px) {
+    .profile-seller-card,
+    .add-product-card,
+    .service-card {
+        grid-template-columns: 1fr;
+        width: 100%;
+        padding: 24px;
+        gap: 24px;
+    }
+
+    .profile-page-head {
+        text-align: center;
+        margin-bottom: 26px;
+    }
+
+    .photo-wrapper,
+    .seller-photo {
+        width: 175px;
+        height: 175px;
+    }
+
+    .upload-box {
+        min-height: 180px;
+    }
+
+    .service-history-card {
+        padding: 24px;
+    }
+
+    .service-info {
+        padding: 24px;
+    }
+}
+
+@media (max-width: 768px) {
+    .top-navbar {
+        top: 14px;
+        left: 14px;
+        right: 14px;
+        height: 68px;
+        grid-template-columns: 42px 1fr auto;
+        padding: 0 16px;
+        border-radius: 22px;
+    }
+
+    .nav-logo {
+        font-size: 25px;
+    }
+
+    .search-box {
+        display: none;
+    }
+
+    .nav-actions {
+        gap: 8px;
+    }
+
+    .nav-actions .primary {
+        display: inline-flex;
+    }
+
+    .nav-actions .primary span,
+    .nav-btn.primary span {
+        display: none;
+    }
+
+    .nav-btn {
+        width: 46px;
+        min-width: 46px;
+        height: 46px;
+        padding: 0;
+    }
+
+    .side-icon,
+    .nav-icon {
+        width: 18px;
+        height: 18px;
+    }
+
+    .seller-main {
+        width: calc(100% - 28px);
+        padding-top: 120px;
+    }
+
+    .hero-dashboard,
+    .page-hero {
+        margin-bottom: 28px;
+    }
+
+    .hero-dashboard h1,
+    .page-hero h1 {
+        font-size: 30px;
+        line-height: 1.25;
+    }
+
+    .hero-dashboard p,
+    .page-hero p {
+        font-size: 16px;
+        line-height: 1.7;
+    }
+
+    .stats-grid,
+    .product-grid,
+    .form-grid,
+    .profile-layout,
+    .action-grid,
+    .dashboard-only {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboard-only {
+        width: 100%;
+        max-width: 480px;
+        gap: 22px;
+    }
+
+    .dashboard-only .stat-card {
+        min-height: 170px;
+        border-radius: 26px;
+    }
+
+    .toolbar,
+    .section-head {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .sidebar {
+        top: 12px;
+        left: -70vw;
+        width: 60vw;
+        height: calc(100vh - 24px);
+        border-radius: 22px;
+    }
+
+    .sidebar.active {
+        left: 12px;
+    }
+
+    .sidebar nav a {
+        padding: 15px 14px;
+        font-size: 14px;
+    }
+
+    .profile-seller-card {
+        padding: 22px;
+        border-radius: 24px;
+    }
+
+    .profile-photo-side {
+        padding: 22px;
+    }
+
+    .messages-card {
+        padding: 22px;
+        border-radius: 24px;
+    }
+
+    .message-item {
+        grid-template-columns: 52px 1fr;
+        align-items: flex-start;
+    }
+
+    .message-avatar {
+        width: 52px;
+        height: 52px;
+    }
+
+    .message-btn {
+        grid-column: 1 / -1;
+        width: 100%;
+    }
+
+    .message-top {
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .seller-chat-card {
+        height: calc(100dvh - 125px);
+        min-height: 0;
+        border-radius: 24px;
+    }
+
+    .seller-chat-header {
+        grid-template-columns: 40px 46px 1fr;
+        gap: 10px;
+        padding: 12px 14px;
+    }
+
+    .chat-back-btn {
+        width: 38px;
+        height: 38px;
+    }
+
+    .buyer-avatar-large {
+        width: 46px;
+        height: 46px;
+    }
+
+    .seller-chat-info h1 {
+        font-size: 17px;
+    }
+
+    .chat-product-price {
+        grid-column: 2 / -1;
+        text-align: left;
+        display: flex;
+        gap: 8px;
+        align-items: center;
+    }
+
+    .chat-product-price span {
+        font-size: 11px;
+    }
+
+    .chat-product-price strong {
+        font-size: 14px;
+    }
+
+    .seller-chat-warning {
+        margin: 8px 14px 0;
+        padding: 9px 12px;
+    }
+
+    .seller-chat-warning p {
+        font-size: 12px;
+    }
+
+    .seller-chat-body {
+        padding: 14px;
+    }
+
+    .seller-message-bubble {
+        max-width: 82%;
+    }
+
+    .seller-quick-replies {
+        padding: 0 14px 10px;
+    }
+
+    .seller-chat-input {
+        padding: 10px 14px 14px;
+    }
 }
 
 @media (max-width: 480px) {
+    .top-navbar {
+        top: 10px;
+        left: 10px;
+        right: 10px;
+        height: 64px;
+        grid-template-columns: 38px 1fr auto;
+        gap: 8px;
+        padding: 0 12px;
+    }
+
+    .menu-toggle {
+        font-size: 28px;
+    }
+
+    .nav-logo {
+        font-size: 22px;
+    }
+
+    .nav-actions {
+        gap: 6px;
+    }
+
+    .nav-btn {
+        width: 42px;
+        min-width: 42px;
+        height: 42px;
+        border-radius: 15px;
+    }
+
+    .seller-main {
+        width: calc(100% - 20px);
+        padding-top: 108px;
+    }
+
+    .hero-dashboard h1,
+    .page-hero h1 {
+        font-size: 27px;
+    }
+
+    .stat-card {
+        min-height: 150px;
+    }
+
+    .dashboard-only {
+        max-width: 100%;
+    }
+
+    .dashboard-only .stat-card {
+        min-height: 160px;
+        padding: 24px;
+    }
+
+    .dashboard-only .stat-card h3 {
+        font-size: 18px;
+    }
+
+    .dashboard-only .stat-card strong {
+        font-size: 36px;
+    }
+
+    .panel,
+    .form-panel,
+    .profile-card,
+    .chat-panel {
+        border-radius: 22px;
+    }
+
+    .sidebar {
+        left: -70vw;
+        width: 60vw;
+        padding: 22px 12px;
+    }
+
+    .sidebar.active {
+        left: 10px;
+    }
+
+    .sidebar-head h2 {
+        font-size: 22px;
+    }
+
+    .sidebar nav a {
+        padding: 14px 10px;
+        font-size: 13px;
+    }
+
+    .profile-page-head h1 {
+        font-size: 30px;
+    }
+
+    .profile-seller-card,
+    .add-product-card,
+    .service-card,
+    .service-history-card {
+        padding: 16px;
+        border-radius: 24px;
+    }
+
+    .profile-photo-side,
+    .upload-panel,
+    .service-info {
+        padding: 18px;
+    }
+
+    .photo-wrapper,
+    .seller-photo {
+        width: 155px;
+        height: 155px;
+    }
+
+    .edit-photo-btn {
+        width: 42px;
+        height: 42px;
+        bottom: 14px;
+    }
+
+    .preview-grid,
+    .messages-card {
+        grid-template-columns: 1fr;
+    }
+
+    .preview-item {
+        height: 180px;
+    }
+
+    .add-actions {
+        flex-direction: column-reverse;
+    }
+
+    .add-actions .btn,
+    .service-actions .btn {
+        width: 100%;
+    }
+
+    .messages-card {
+        padding: 16px;
+    }
+
+    .message-item {
+        padding: 16px;
+        gap: 14px;
+    }
+
+    .message-top h3 {
+        font-size: 16px;
+    }
+
+    .seller-chat-card {
+        height: calc(100dvh - 112px);
+        border-radius: 22px;
+    }
+
+    .seller-chat-header {
+        grid-template-columns: 38px 1fr;
+        padding: 12px;
+    }
+
+    .buyer-avatar-large {
+        display: none;
+    }
+
+    .seller-chat-info h1 {
+        font-size: 16px;
+    }
+
+    .seller-chat-info p {
+        margin-bottom: 4px;
+    }
+
+    .chat-product-pill {
+        max-width: 190px;
+        font-size: 11px;
+        padding: 5px 9px;
+    }
+
+    .chat-product-price {
+        grid-column: 1 / -1;
+        padding-left: 50px;
+        margin-top: -4px;
+    }
+
+    .seller-chat-warning {
+        margin: 8px 12px 0;
+        padding: 8px 10px;
+    }
+
+    .seller-chat-warning strong {
+        font-size: 12px;
+    }
+
+    .seller-chat-warning p {
+        display: none;
+    }
+
+    .seller-chat-body {
+        padding: 12px;
+    }
+
+    .seller-message-bubble {
+        max-width: 90%;
+        padding: 11px 13px;
+    }
+
+    .seller-message-bubble p {
+        font-size: 14px;
+    }
+
+    .seller-quick-replies {
+        gap: 6px;
+        padding: 0 12px 8px;
+    }
+
+    .seller-quick-replies button {
+        padding: 7px 10px;
+        font-size: 11px;
+    }
+
     .seller-chat-input {
         grid-template-columns: 40px 1fr 44px;
+        gap: 8px;
+        padding: 10px 12px 12px;
+    }
+
+    .seller-chat-input textarea {
+        min-height: 44px;
+        padding: 12px;
+        font-size: 14px;
+    }
+
+    .seller-send-btn {
+        width: 44px;
+        height: 44px;
+        border-radius: 14px;
     }
 
     .chat-plus-btn {
@@ -2144,5 +2054,29 @@ select {
     .chat-image-attachment {
         width: min(220px, 100%);
         max-height: 220px;
+    }
+
+    .service-icon {
+        width: 54px;
+        height: 54px;
+        font-size: 26px;
+    }
+
+    .service-history-top {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .delete-modal-box {
+        padding: 24px;
+        border-radius: 24px;
+    }
+
+    .delete-modal-actions {
+        flex-direction: column-reverse;
+    }
+
+    .delete-modal-actions .btn {
+        width: 100%;
     }
 }
