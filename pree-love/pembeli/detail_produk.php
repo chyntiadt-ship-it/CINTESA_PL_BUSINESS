@@ -57,21 +57,19 @@ $produk = mysqli_fetch_assoc($query);
 $foto_produk = mysqli_query($koneksi, "SELECT * FROM produk_foto WHERE id_produk='$id_produk'");
 $foto_utama = mysqli_fetch_assoc($foto_produk);
 $status_tampil = status_label($produk['status_produk']);
-$produk_nonaktif = (
-    $produk['status_produk'] == 'Dihapus' ||
-    $produk['status_produk'] == 'Terjual' ||
-    $status_tampil == 'Stok Habis'
-);
 
-$nego_boleh = strtolower(trim($produk['keterangan_nego'])) == 'bisa nego';
+$keterangan_nego = strtolower(trim($produk['keterangan_nego'] ?? ''));
+$nego_boleh = ($keterangan_nego === 'bisa nego');
 ?>
+
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <title>Detail Produk - CINTESA</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../assets/css/detail_produk.css?v=30">
+    <link rel="stylesheet" href="../assets/css/detail_produk.css?v=999">
 </head>
 <body>
 
@@ -82,28 +80,29 @@ $nego_boleh = strtolower(trim($produk['keterangan_nego'])) == 'bisa nego';
 
         <div class="top-actions">
             <a href="cari_produk.php" class="top-icon">⌕</a>
-            <a href="keranjang.php" class="top-icon">🛒</a>
         </div>
     </header>
 
     <section class="layout-detail">
 
         <div class="left-panel">
-    <section class="product-hero">
-        <?php if (!empty($foto_utama['foto'])) { ?>
-            <img src="../uploads/produk/<?php echo htmlspecialchars($foto_utama['foto']); ?>" class="hero-image" alt="Foto Produk">
-        <?php } else { ?>
-            <div class="hero-placeholder">
-                <span>🛍️</span>
-                <p>Foto produk belum tersedia</p>
-            </div>
-        <?php } ?>
-    </section>
+            <section class="product-hero">
+                <?php if (!empty($foto_utama['foto'])) { ?>
+                    <img src="../uploads/produk/<?php echo htmlspecialchars($foto_utama['foto']); ?>" class="hero-image" alt="Foto Produk">
+                <?php } else { ?>
+                    <div class="hero-placeholder">
+                        <span>🛍️</span>
+                        <p>Foto produk belum tersedia</p>
+                    </div>
+                <?php } ?>
+            </section>
 
-    <a href="chat.php?id_produk=<?php echo $produk['id_produk']; ?>" class="seller-chat-btn">
-        <span>💬</span> Chat ke Penjual
-    </a>
-</div>
+            <?php if ($produk['status_produk'] == 'Tersedia') { ?>
+                <a href="chat.php?id_produk=<?php echo $produk['id_produk']; ?>" class="seller-chat-btn">
+                    💬 Chat ke Penjual
+                </a>
+            <?php } ?>
+        </div>
 
         <div class="right-panel">
             <section class="product-main-card">
@@ -147,9 +146,9 @@ $nego_boleh = strtolower(trim($produk['keterangan_nego'])) == 'bisa nego';
                     </strong>
                 </div>
                 <div class="info-row nego-row">
-    <span>Status Nego</span>
+        <span>Status Nego</span>
 
-    <div class="nego-wrapper">
+        <div class="nego-wrapper">
 
         <?php if ($nego_boleh) { ?>
 
@@ -209,25 +208,76 @@ $nego_boleh = strtolower(trim($produk['keterangan_nego'])) == 'bisa nego';
 </main>
 
 <nav class="bottom-action">
-    <?php if ($produk_nonaktif) { ?>
-        <button class="cart-action disabled-action" disabled>
-            🛒 + Keranjang
-        </button>
+    <button type="button" class="cart-action" id="shareProductBtn" onclick="openShareModal()">
+        Bagikan Link Produk
+    </button>
 
-        <button class="buy-btn disabled-action" disabled>
-            Beli Langsung
-        </button>
-    <?php } else { ?>
-        <a href="keranjang.php?id_produk=<?php echo $produk['id_produk']; ?>" class="cart-action">
-            🛒 + Keranjang
-        </a>
-
-        <a href="chat.php?id_produk=<?php echo $produk['id_produk']; ?>" class="buy-btn">
-            Beli Langsung
-        </a>
-    <?php } ?>
+    <a href="chat.php?id_produk=<?php echo $produk['id_produk']; ?>" class="buy-btn">
+        Beli Sekarang
+    </a>
 </nav>
 
-<script src="../assets/js/detail_produk.js?v=30"></script>
+<div class="share-modal" id="shareModal">
+    <div class="share-box">
+        <button type="button" class="share-close" onclick="closeShareModalFunc()">×</button>
+
+        <h2>Bagikan ini dengan komunitas anda</h2>
+
+        <div class="share-icons">
+            <a href="#" class="share-icon fb">f</a>
+            <a href="#" class="share-icon ms">💬</a>
+            <a href="#" class="share-icon wa">☘</a>
+            <a href="#" class="share-icon tw">𝕏</a>
+            <a href="#" class="share-icon em">✉</a>
+        </div>
+
+        <p class="copy-title">Or copy link</p>
+
+        <div class="copy-link-box">
+            <input type="text" id="productLinkInput" readonly>
+            <button type="button" onclick="copyProductUrl()">⧉</button>
+        </div>
+    </div>
+</div>
+
+<script>
+function openShareModal() {
+    const modal = document.getElementById('shareModal');
+    const input = document.getElementById('productLinkInput');
+
+    if (input) {
+        input.value = window.location.href;
+    }
+
+    if (modal) {
+        modal.classList.add('active');
+    }
+}
+
+function closeShareModalFunc() {
+    const modal = document.getElementById('shareModal');
+
+    if (modal) {
+        modal.classList.remove('active');
+    }
+}
+
+function copyProductUrl() {
+    const input = document.getElementById('productLinkInput');
+
+    if (!input) return;
+
+    input.select();
+    document.execCommand('copy');
+}
+
+document.addEventListener('click', function(e) {
+    const modal = document.getElementById('shareModal');
+
+    if (e.target === modal) {
+        modal.classList.remove('active');
+    }
+});
+</script>
 </body>
 </html>
