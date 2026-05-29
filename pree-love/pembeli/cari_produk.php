@@ -86,58 +86,6 @@ $produk = mysqli_query($koneksi, $query_produk);
         </form>
     </header>
 
-    <section class="search-card">
-        <div class="section-head">
-            <h2>Terakhir dicari</h2>
-            <button type="button" id="clearHistory">Hapus Semua</button>
-        </div>
-
-        <div class="history-list" id="historyList"></div>
-
-        <div class="history-more-wrap" id="historyMoreWrap"></div>
-    </section>
-
-    <section class="search-card">
-        <div class="section-head">
-            <h2>Pencarian Populer</h2>
-            <button type="button" id="refreshPopular">Refresh</button>
-        </div>
-
-        <div class="popular-list">
-            <a href="cari_produk.php?keyword=Fashion" class="popular-item">
-                <span>👕</span>
-                <div>
-                    <h3>Fashion</h3>
-                    <p>10.6 rb pencarian</p>
-                </div>
-            </a>
-
-            <a href="cari_produk.php?keyword=Elektronik" class="popular-item">
-                <span>💻</span>
-                <div>
-                    <h3>Elektronik</h3>
-                    <p>13.7 rb pencarian</p>
-                </div>
-            </a>
-
-            <a href="cari_produk.php?keyword=Buku" class="popular-item">
-                <span>📚</span>
-                <div>
-                    <h3>Buku</h3>
-                    <p>8.5 rb pencarian</p>
-                </div>
-            </a>
-
-            <a href="cari_produk.php?keyword=Furnitur" class="popular-item">
-                <span>🪑</span>
-                <div>
-                    <h3>Furnitur</h3>
-                    <p>7.2 rb pencarian</p>
-                </div>
-            </a>
-        </div>
-    </section>
-
     <section class="result-section">
         <h2>Hasil Produk</h2>
 
