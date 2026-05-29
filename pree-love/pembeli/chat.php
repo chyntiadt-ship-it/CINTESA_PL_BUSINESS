@@ -66,10 +66,26 @@ if (!isset($_GET['id_chat'])) {
     <meta charset="UTF-8">
     <title>Riwayat Chat - CINTESA</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../assets/css/chat_pembeli.css?v=1">
+    <link rel="stylesheet" href="../assets/css/chat_pembeli.css?v=99">
+    <script src="../assets/js/chat_pembeli.js?v=99"></script>
 </head>
 <body>
+<header class="chat-top-navbar">
+    <div class="chat-top-left">
+        <button type="button" class="chat-menu-btn">☰</button>
+        <a href="dashboard.php" class="chat-brand">CINTESA</a>
+    </div>
 
+    <form class="chat-search" action="cari_produk.php" method="GET">
+        <span>⌕</span>
+        <input type="text" name="keyword" placeholder="Cari produk saya...">
+    </form>
+
+    <div class="chat-top-actions">
+        <a href="produk.php" class="chat-action active">⌘</a>
+        <a href="chat.php" class="chat-action">▣</a>
+    </div>
+</header>
 <main class="chat-history-page">
     <header class="history-header">
         <a href="dashboard.php" class="back-btn">‹</a>
@@ -110,13 +126,22 @@ exit;
 
 $id_chat = mysqli_real_escape_string($koneksi, $_GET['id_chat']);
 
-$query_chat = mysqli_query($koneksi, "SELECT chat.*, produk.nama_produk, produk.status_produk, user.username AS username_penjual, user.nama_lengkap AS nama_penjual
+$sql_chat = "
+    SELECT 
+        chat.*, 
+        produk.nama_produk, 
+        produk.status_produk, 
+        produk.harga,
+        user.username AS username_penjual, 
+        user.nama_lengkap AS nama_penjual
     FROM chat
     JOIN produk ON chat.id_produk = produk.id_produk
     JOIN user ON chat.id_penjual = user.id_user
-    WHERE chat.id_chat='$id_chat'
-    AND chat.id_pembeli='$id_pembeli'
-");
+    WHERE chat.id_chat = '$id_chat'
+    AND chat.id_pembeli = '$id_pembeli'
+";
+
+$query_chat = mysqli_query($koneksi, $sql_chat);
 
 if (mysqli_num_rows($query_chat) == 0) {
     echo "Chat tidak ditemukan.";
@@ -139,38 +164,60 @@ $pesan = mysqli_query($koneksi, "SELECT pesan.*, user.username
     <meta charset="UTF-8">
     <title>Chat Pembeli - CINTESA</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../assets/css/chat_pembeli.css?v=1">
+    <link rel="stylesheet" href="../assets/css/chat_pembeli.css?v=120">
 </head>
 <body>
+<header class="chat-global-navbar">
+    <div class="chat-nav-left">
+        <button type="button" class="chat-menu-btn">☰</button>
+        <a href="dashboard.php" class="chat-brand">CINTESA</a>
+    </div>
 
+    <form action="cari_produk.php" method="GET" class="chat-nav-search">
+        <span>⌕</span>
+        <input type="text" name="keyword" placeholder="Cari produk saya...">
+    </form>
+
+    <div class="chat-nav-actions">
+        <a href="chat.php" class="chat-nav-btn active">◈</a>
+        <a href="chat.php" class="chat-nav-btn">▣</a>
+    </div>
+</header>
 <main class="chat-page">
 
     <header class="chat-header">
-        <a href="chat.php" class="back-btn">‹</a>
+    <a href="chat.php" class="back-btn">‹</a>
 
-        <div class="seller-avatar">
-            <?php echo strtoupper(substr($data_chat['username_penjual'], 0, 1)); ?>
-        </div>
+    <div class="seller-avatar">
+        <?php echo strtoupper(substr($data_chat['username_penjual'], 0, 1)); ?>
+    </div>
 
-        <div class="seller-head">
-            <div>
-                <strong><?php echo htmlspecialchars($data_chat['nama_penjual'] ?? $data_chat['username_penjual']); ?></strong>
-                <span>Penjual</span>
-            </div>
-            <p><?php echo htmlspecialchars($data_chat['nama_produk']); ?></p>
-        </div>
+    <div class="seller-head">
+        <strong><?php echo htmlspecialchars($data_chat['nama_penjual'] ?? $data_chat['username_penjual']); ?></strong>
+        <p>@<?php echo htmlspecialchars($data_chat['username_penjual']); ?></p>
+        <span class="product-pill">
+            Produk: <?php echo htmlspecialchars($data_chat['nama_produk']); ?>
+        </span>
+    </div>
 
-        <button class="more-btn" type="button">⋮</button>
-    </header>
+    <div class="chat-product-price">
+        <small>Harga Produk</small>
+        <strong>
+            Rp<?php echo number_format($data_chat['harga'] ?? 0, 0, ',', '.'); ?>
+        </strong>
+    </div>
+</header>
 
-    <section class="warning-box">
-        Hati-hati penipuan! Jangan bertransaksi di luar CINTESA dan jangan memberikan data pribadi seperti nomor HP atau alamat.
-    </section>
 
     <section class="info-box">
-        <span>ⓘ</span>
-        <p>Gunakan chat CINTESA untuk bertanya stok, nego harga, dan detail produk.</p>
-    </section>
+    <div>
+        <strong>Catatan Keamanan</strong>
+        <p>
+            Gunakan chat CINTESA untuk membahas stok, kondisi barang, nego harga,
+            dan detail produk. Hindari transaksi di luar platform.
+        </p>
+    </div>
+</section>
 
     <section class="chat-body" id="chatBody">
         <?php if (mysqli_num_rows($pesan) > 0) { ?>
@@ -196,21 +243,35 @@ $pesan = mysqli_query($koneksi, "SELECT pesan.*, user.username
         <button type="button">Bisa dikirim hari ini?</button>
         <button type="button">Terima kasih!</button>
     </section>
+<form action="proses_kirim_pesan.php" method="POST" class="chat-input-bar" enctype="multipart/form-data">
+    <input type="hidden" name="id_chat" value="<?php echo $id_chat; ?>">
 
-    <form action="proses_kirim_pesan.php" method="POST" class="chat-input-bar">
-        <input type="hidden" name="id_chat" value="<?php echo $id_chat; ?>">
+    <div class="attach-wrap">
+        <button type="button" class="plus-btn" id="attachToggle">＋</button>
 
-        <button type="button" class="emoji-btn">☻</button>
+        <div class="attach-menu" id="attachMenu">
+            <button type="button" id="chooseGallery">
+                <span>🖼️</span>
+                Pilih dari Galeri
+            </button>
 
-        <textarea name="isi_pesan" rows="1" placeholder="Tulis Pesan..." required></textarea>
+            <button type="button" id="openCamera">
+                <span>📷</span>
+                Ambil Langsung
+            </button>
+        </div>
+    </div>
 
-        <button type="button" class="plus-btn">＋</button>
+    <textarea name="isi_pesan" rows="1" placeholder="Tulis Pesan..." required></textarea>
 
-        <button type="submit" name="kirim" class="send-btn">➤</button>
-    </form>
+    <button type="submit" name="kirim" class="send-btn">➤</button>
+
+    <input type="file" id="galleryInput" name="gambar_pesan" accept="image/*" hidden>
+    <input type="file" id="cameraInput" name="gambar_kamera" accept="image/*" capture="environment" hidden>
+</form>
 
 </main>
 
-<script src="../assets/js/chat_pembeli.js?v=1"></script>
+<script src="../assets/js/chat_pembeli.js?v=120"></script>
 </body>
 </html>
