@@ -60,17 +60,6 @@ $produk = mysqli_query($koneksi, "
         <div class="search-suggestion-box" id="searchSuggestionBox"></div>
     </form>
 </div>
-
-    <div class="nav-actions">
-        <a href="notifikasi.php" class="nav-icon" aria-label="Notifikasi">
-            ♧
-        </a>
-
-        <a href="keranjang.php" class="nav-icon" aria-label="Keranjang">
-            🛒
-        </a>
-    </div>
-
 </header>
 
 <aside class="side-navbar" id="sideNavbar">
@@ -90,10 +79,6 @@ $produk = mysqli_query($koneksi, "
 
         <a href="profile.php" class="side-item">
             <span>◉</span> Profil
-        </a>
-
-        <a href="transaksi.php" class="side-item">
-            <span>▤</span> Transaksi
         </a>
 
         <a href="chat.php" class="side-item">
@@ -124,7 +109,7 @@ $produk = mysqli_query($koneksi, "
     </section>
 
     <section class="fyp-section">
-        <h2>FYP Produk Untuk Kamu</h2>
+        <h2>Produk Untuk Kamu</h2>
 
         <div class="product-grid">
 
