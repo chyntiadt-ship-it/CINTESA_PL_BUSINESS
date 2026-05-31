@@ -56,7 +56,7 @@ if (isset($_SESSION['id_user'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login to CINTESA</title>
-    <link rel="stylesheet" href="../assets/css/login.css">
+    <link rel="stylesheet" href="../assets/css/login.css?v=2">
 </head>
 <body>
 
@@ -74,14 +74,14 @@ if (isset($_SESSION['id_user'])) {
 
             <form method="POST" class="login-form">
                 <div class="input-group">
-                    <span class="icon-left">👤</span>
+                   <img src="../assets/icon/user.png" class="input-icon icon-left" alt="">
                     <input type="text" name="email_username" placeholder="Email atau Username" required>
                 </div>
 
                 <div class="input-group">
-                    <span class="icon-left">🔒</span>
+                    <img src="../assets/icon/locked-computer.png" class="input-icon icon-left" alt="Password">
                     <input type="password" name="password" id="password" placeholder="Password" required>
-                    <span class="eye-icon" id="togglePassword">👁</span>
+                    <img src="../assets/icon/view.png" class="eye-icon" id="togglePassword" alt="">
                 </div>
 
                 <button type="submit" name="login" class="login-btn">Login</button>
@@ -94,7 +94,7 @@ if (isset($_SESSION['id_user'])) {
     </main>
 
     <script src="../assets/js/main.js"></script>
-    <script src="../assets/js/login.js"></script>
+    <script src="../assets/js/login.js?v=10"></script>
 
 </body>
 </html>
