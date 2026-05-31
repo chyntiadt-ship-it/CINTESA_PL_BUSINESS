@@ -80,11 +80,6 @@ if (!isset($_GET['id_chat'])) {
         <span>⌕</span>
         <input type="text" name="keyword" placeholder="Cari produk saya...">
     </form>
-
-    <div class="chat-top-actions">
-        <a href="produk.php" class="chat-action active">⌘</a>
-        <a href="chat.php" class="chat-action">▣</a>
-    </div>
 </header>
 <main class="chat-history-page">
     <header class="history-header">
