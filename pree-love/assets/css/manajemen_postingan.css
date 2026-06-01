@@ -28,7 +28,90 @@
     padding: 40px 20px;
 }
 
+.postingan-search-form {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.postingan-search-form input {
+    width: min(100%, 430px);
+    height: 48px;
+    border-radius: 18px;
+    border: 1px solid var(--border);
+    background: var(--field);
+    color: var(--text);
+    padding: 0 18px;
+    font-size: 14px;
+    font-weight: 600;
+    outline: none;
+}
+
+.postingan-search-form input:focus {
+    border-color: #000;
+    box-shadow: 0 0 0 4px rgba(0,0,0,0.08);
+}
+
+.search-result-info {
+    width: min(100%, 960px);
+    margin: 0 auto 24px;
+    padding: 16px 20px;
+    border-radius: 18px;
+    background: var(--field);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-weight: 700;
+}
+
+.search-result-info a {
+    margin-left: 12px;
+    color: #000;
+    font-weight: 900;
+    text-decoration: underline;
+}
+
+body.dark .search-result-info a {
+    color: var(--text);
+}
+
 @media (max-width: 768px) {
+    .top-navbar {
+        height: auto;
+        min-height: 68px;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        row-gap: 12px;
+        padding: 14px;
+    }
+
+    .nav-left {
+        grid-column: 1 / 2;
+    }
+
+    .nav-right {
+        grid-column: 2 / 3;
+        justify-self: end;
+    }
+
+    .nav-center {
+        grid-column: 1 / 3;
+        width: 100%;
+        display: block;
+    }
+
+    .postingan-search-form {
+        width: 100%;
+    }
+
+    .postingan-search-form input {
+        width: 100%;
+        height: 44px;
+        font-size: 13px;
+    }
+
+    .manajemen-postingan-page .admin-container {
+        padding-top: 150px;
+    }
 
     .manajemen-postingan-page .admin-header {
         margin-bottom: 28px;
@@ -38,3 +121,38 @@
         line-height: 1.2;
     }
 }
+
+@media (max-width: 480px) {
+    .postingan-search-form input {
+        height: 42px;
+        border-radius: 16px;
+        font-size: 12px;
+        padding: 0 14px;
+    }
+
+    .search-result-info {
+        font-size: 13px;
+        padding: 14px 16px;
+    }
+
+    .search-result-info a {
+        display: inline-block;
+        margin-left: 0;
+        margin-top: 8px;
+    }
+
+    .manajemen-postingan-page .nav-center {
+    display: flex !important;
+    grid-column: 1 / 3;
+    width: 100%;
+    justify-content: center;
+    }
+
+    .manajemen-postingan-page .postingan-search-form {
+        width: 100%;
+    }
+
+    .manajemen-postingan-page .postingan-search-form input {
+        width: 100%;
+    }
+}   
