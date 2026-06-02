@@ -26,40 +26,40 @@ session_start();
 
             
            <div class="input-group">
-    <img src="../assets/icon/user.png" class="input-icon icon-left" alt="">
+    <img src="../assets/icons/user.png" class="input-icon icon-left" alt="">
     <input type="text" name="username" placeholder="Username" required>
 </div>
 
 <div class="input-group">
-    <img src="../assets/icon/id-card.png" class="input-icon icon-left" alt="">
+    <img src="../assets/icons/id-card.png" class="input-icon icon-left" alt="">
     <input type="text" name="nama_lengkap" placeholder="Nama Lengkap" required>
 </div>
 
 <div class="input-group">
-    <img src="../assets/icon/email.png" class="input-icon icon-left" alt="">
+    <img src="../assets/icons/email.png" class="input-icon icon-left" alt="">
     <input type="email" name="email" placeholder="Email" required>
 </div>
 
 <div class="input-group">
-    <img src="../assets/icon/locked-computer.png" class="input-icon icon-left" alt="">
+    <img src="../assets/icons/locked-computer.png" class="input-icon icon-left" alt="">
     <input type="password" name="password" id="password" placeholder="Password" required>
     <img src="../assets/icon/eye.png" class="eye-icon" id="togglePassword" alt="">
 </div>
 
 <div class="input-group">
-    <img src="../assets/icon/locked-computer.png" class="input-icon icon-left" alt="">
+    <img src="../assets/icons/locked-computer.png" class="input-icon icon-left" alt="">
     <input type="password" name="konfirmasi_password" id="confirmPassword" placeholder="Konfirmasi Password" required>
     <img src="../assets/icon/eye.png" class="eye-icon" id="toggleConfirmPassword" alt="">
 </div>
 
 <div class="input-group phone-group">
-    <img src="../assets/icon/telephone.png" class="input-icon icon-left" alt="">
+    <img src="../assets/icons/telephone.png" class="input-icon icon-left" alt="">
     <span class="phone-prefix">+62</span>
     <input type="tel" name="nomor_telepon" id="phone" maxlength="13" required>
 </div>
 
 <div class="input-group">
-    <img src="../assets/icon/user.png" class="input-icon icon-left" alt="">
+    <img src="../assets/icons/user.png" class="input-icon icon-left" alt="">
 
     <select name="role" required>
         <option value="">Pilih Role</option>
