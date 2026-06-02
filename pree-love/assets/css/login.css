@@ -136,23 +136,7 @@ body.dark .input-group input:focus {
                 0 18px 45px rgba(0, 0, 0, 0.28);
 }
 
-.icon-left,
-.eye-icon {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--text);
-    font-size: 18px;
-}
 
-.icon-left {
-    left: 22px;
-}
-
-.eye-icon {
-    right: 22px;
-    cursor: pointer;
-}
 
 .login-btn {
     width: 100%;
@@ -247,4 +231,85 @@ body.dark .input-group input:focus {
     .login-container h1 .brand {
         letter-spacing: 3px;
     }
+}
+
+.input-icon,
+.eye-icon {
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+}
+
+.icon-left {
+    left: 22px;
+}
+
+.eye-icon {
+    right: 22px;
+    cursor: pointer;
+}
+.input-group img.input-icon,
+.input-group img.eye-icon {
+    width: 22px !important;
+    height: 22px !important;
+    max-width: 22px !important;
+    max-height: 22px !important;
+    object-fit: contain !important;
+    display: block !important;
+}
+
+.input-group .icon-left {
+    position: absolute !important;
+    left: 22px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+}
+
+.input-group .eye-icon {
+    position: absolute !important;
+    right: 22px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    cursor: pointer !important;
+}
+
+/* =========================
+   ICON PNG LOGIN
+========================= */
+
+.input-group{
+    position: relative;
+}
+
+.input-group input{
+    padding-left: 60px;
+    padding-right: 60px;
+}
+
+.input-icon{
+    position: absolute;
+    left: 22px;
+    top: 50%;
+    transform: translateY(-50%);
+
+    width: 22px;
+    height: 22px;
+
+    object-fit: contain;
+    display: block;
+}
+
+.eye-icon{
+    position: absolute;
+    right: 22px;
+    top: 50%;
+    transform: translateY(-50%);
+
+    width: 22px;
+    height: 22px;
+
+    object-fit: contain;
+    display: block;
+
+    cursor: pointer;
 }
