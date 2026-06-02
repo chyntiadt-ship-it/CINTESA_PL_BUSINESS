@@ -1,17 +1,17 @@
 const togglePassword = document.getElementById("togglePassword");
-const passwordInput = document.getElementById("password");
+const password = document.getElementById("password");
 
-togglePassword.addEventListener("click", function () {
-    const isPassword = passwordInput.type === "password";
+if (togglePassword && password) {
+    // kondisi awal: password tersembunyi, maka ikon mata tertutup
+    togglePassword.src = "../assets/icons/eye.png";
 
-    passwordInput.type = isPassword ? "text" : "password";
-    togglePassword.textContent = isPassword ? "🙈" : "👁";
-});
-
-const popup = document.querySelector(".popup-error");
-
-if (popup) {
-    setTimeout(() => {
-        popup.style.display = "none";
-    }, 3000);
+    togglePassword.addEventListener("click", function () {
+        if (password.type === "password") {
+            password.type = "text";
+            togglePassword.src = "../assets/icons/view.png";
+        } else {
+            password.type = "password";
+            togglePassword.src = "../assets/icons/eye.png";
+        }
+    });
 }
