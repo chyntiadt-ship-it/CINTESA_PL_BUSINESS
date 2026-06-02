@@ -43,13 +43,13 @@ session_start();
 <div class="input-group">
     <img src="../assets/icons/locked-computer.png" class="input-icon icon-left" alt="">
     <input type="password" name="password" id="password" placeholder="Password" required>
-    <img src="../assets/icon/eye.png" class="eye-icon" id="togglePassword" alt="">
+    <img src="../assets/icons/eye.png" class="eye-icon" id="togglePassword" alt="">
 </div>
 
 <div class="input-group">
     <img src="../assets/icons/locked-computer.png" class="input-icon icon-left" alt="">
     <input type="password" name="konfirmasi_password" id="confirmPassword" placeholder="Konfirmasi Password" required>
-    <img src="../assets/icon/eye.png" class="eye-icon" id="toggleConfirmPassword" alt="">
+    <img src="../assets/icons/view.png" class="eye-icon" id="toggleConfirmPassword" alt="">
 </div>
 
 <div class="input-group phone-group">
@@ -84,7 +84,7 @@ session_start();
 </main>
 
 <script src="../assets/js/main.js"></script>
-<script src="../assets/js/register.js?v=2"></script>
+<script src="../assets/js/register.js?v=3"></script>
 
 </body>
 </html>
