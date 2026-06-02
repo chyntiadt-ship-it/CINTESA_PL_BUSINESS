@@ -1,55 +1,21 @@
-const passwordInput = document.getElementById("password");
-const confirmPasswordInput = document.getElementById("confirmPassword");
-const togglePassword = document.getElementById("togglePassword");
-const toggleConfirmPassword = document.getElementById("toggleConfirmPassword");
+function setupPasswordToggle(inputId, iconId) {
+    const input = document.getElementById(inputId);
+    const icon = document.getElementById(iconId);
 
-togglePassword.addEventListener("click", function () {
-    const isPassword = passwordInput.type === "password";
-    passwordInput.type = isPassword ? "text" : "password";
-    togglePassword.textContent = isPassword ? "🙈" : "👁";
-});
+    if (!input || !icon) return;
 
-toggleConfirmPassword.addEventListener("click", function () {
-    const isPassword = confirmPasswordInput.type === "password";
-    confirmPasswordInput.type = isPassword ? "text" : "password";
-    toggleConfirmPassword.textContent = isPassword ? "🙈" : "👁";
-});
+    icon.src = "../assets/icons/eye.png";
 
-const registerForm = document.querySelector(".register-form");
-const phoneInput = document.getElementById("phone");
+    icon.addEventListener("click", function () {
+        if (input.type === "password") {
+            input.type = "text";
+            icon.src = "../assets/icons/view.png";
+        } else {
+            input.type = "password";
+            icon.src = "../assets/icons/eye.png";
+        }
+    });
+}
 
-phoneInput.addEventListener("input", function () {
-    this.value = this.value.replace(/\D/g, "");
-
-    if (this.value.length > 13) {
-        this.value = this.value.slice(0, 13);
-        alert("Nomor telepon maksimal 15 digit");
-    }
-});
-
-registerForm.addEventListener("submit", function (e) {
-    const phone = phoneInput.value.trim();
-
-    if (phone.length > 13) {
-        e.preventDefault();
-        alert("Nomor telepon maksimal 15 digit");
-        phoneInput.focus();
-        return;
-    }
-
-    if (phone.length < 9) {
-        e.preventDefault();
-        alert("Nomor telepon tidak valid");
-        phoneInput.focus();
-        return;
-    }
-
-    if (passwordInput.value !== confirmPasswordInput.value) {
-        e.preventDefault();
-        alert("Konfirmasi password tidak sesuai");
-        confirmPasswordInput.focus();
-        return;
-    }
-
-    phoneInput.value = "+62" + phone;
-});
+setupPasswordToggle("password", "togglePassword");
+setupPasswordToggle("confirmPassword", "toggleConfirmPassword");
