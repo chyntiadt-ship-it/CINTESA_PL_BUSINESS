@@ -74,24 +74,24 @@ $produk = mysqli_query($koneksi, "
 
     <nav class="side-menu">
         <a href="dashboard.php" class="side-item active">
-            <img src="../assets/icon/home.png" class="side-icon" alt="Beranda">
+            <img src="../assets/icons/home.png" class="side-icon" alt="Beranda">
             Beranda
         </a>
 
         <a href="profile.php" class="side-item">
-             <img src="../assets/icon/user.png" class="side-icon" alt="">Profil
+             <img src="../assets/icons/user.png" class="side-icon" alt="">Profil
         </a>
 
         <a href="chat.php" class="side-item">
-            <img src="../assets/icon/chat.png" class="side-icon" alt=""> Chat
+            <img src="../assets/icons/chat.png" class="side-icon" alt=""> Chat
         </a>
 
         <a href="customer_service.php" class="side-item">
-             <img src="../assets/icon/call-center.png" class="side-icon" alt=""> Customer Service
+             <img src="../assets/icons/call-center.png" class="side-icon" alt=""> Customer Service
         </a>
 
         <a href="../auth/logout.php" class="side-item logout">
-             <img src="../assets/icon/logout.png" class="side-icon" alt="">
+             <img src="../assets/icons/logout.png" class="side-icon" alt="">
         Logout
         </a>
     </nav>
