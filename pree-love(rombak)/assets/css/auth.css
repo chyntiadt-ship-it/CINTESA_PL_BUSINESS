@@ -1,0 +1,178 @@
+.auth-page {
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    padding: 90px 24px 40px;
+}
+
+.auth-container {
+    width: min(560px, 100%);
+}
+
+.auth-card {
+    text-align: center;
+}
+
+.auth-card h1 {
+    margin-bottom: 36px;
+    font-size: clamp(34px, 5vw, 58px);
+    font-weight: 800;
+}
+
+.auth-card h1 span {
+    font-family: "Playfair Display", serif;
+    letter-spacing: 4px;
+}
+
+.auth-form {
+    width: 100%;
+}
+
+.input-group {
+    position: relative;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.input-group input,
+.input-group select {
+    width: 100%;
+    height: 62px;
+    padding: 0 20px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,.78);
+    outline: 0;
+    font-size: 16px;
+    box-shadow: 0 14px 32px rgba(0,0,0,.06);
+}
+
+.input-group input[type="password"] {
+    padding-right: 58px;
+}
+
+.password-toggle {
+    position: absolute;
+    top: 50%;
+    right: 14px;
+    transform: translateY(-50%);
+    width: 38px;
+    height: 38px;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+}
+
+.auth-switch {
+    margin-top: 24px;
+    color: var(--muted);
+}
+
+.auth-switch a {
+    font-weight: 900;
+    color: var(--text);
+    text-decoration: underline;
+}
+
+@media (max-width: 480px) {
+    .auth-page {
+        padding-inline: 18px;
+    }
+
+    .input-group input,
+    .input-group select {
+        height: 56px;
+        border-radius: 17px;
+    }
+}
+
+.password-group {
+    position: relative;
+}
+
+.password-group input {
+    padding-right: 58px !important;
+}
+
+.password-toggle {
+    position: absolute;
+    top: 50%;
+    right: 18px;
+    transform: translateY(-50%);
+    width: 28px;
+    height: 28px;
+    border: none;
+    background: transparent;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.password-toggle img {
+    width: 20px;
+    height: 20px;
+    max-width: 20px;
+    max-height: 20px;
+    object-fit: contain;
+    display: block;
+}
+
+/* SELECT ROLE DENGAN IKON SENDIRI */
+.select-group {
+    position: relative;
+}
+
+.select-group select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+    padding-right: 58px !important;
+    cursor: pointer;
+
+    background-image: url("../assets/icons/down.png");
+    background-repeat: no-repeat;
+    background-size: 20px 20px;
+    background-position: right 18px center;
+}
+
+.select-group select::-ms-expand {
+    display: none;
+}
+
+/* SELECT ROLE DENGAN IKON DOWN.PNG */
+.select-group {
+    position: relative;
+}
+
+.select-group select {
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+
+    padding-right: 58px !important;
+    cursor: pointer;
+    background-image: none !important;
+}
+
+.select-group select::-ms-expand {
+    display: none;
+}
+
+.select-arrow-icon {
+    position: absolute;
+    top: 50%;
+    right: 18px;
+    transform: translateY(-50%);
+
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+
+    pointer-events: none;
+    display: block;
+}
